@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<macromedia-extension id="<%= id %>" name="<%= name %>" requires-restart="true" version="<%= version %>" icon="<%= icons.mxi %>">
+	<% if (update_url.length) { %><update method="directlink" url="<%= update_url %>" /><% } %>
+	<author name="<%= author_name %>" />
+	<description<% if (description_href.length) { %> href="<%= description_href %>"<% } %>><![CDATA[<%= description %>]]></description>
+	<license-agreement><![CDATA[<%= license_agreement %>]]></license-agreement>
+	<ui-access><![CDATA[<%= ui_access %>]]></ui-access>
+	<products>
+		<%= products %>
+	</products>
+	<files>
+		<%= files %>
+		<file source="<%= icons.mxi %>" destination="$ExtensionSpecificEMStore" />
+	</files>
+</macromedia-extension>
