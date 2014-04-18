@@ -62,7 +62,7 @@ module.exports = function (grunt)
         // Check whether we should launch debug or package the full extension
         if (options.profile === 'debug' || options.profile === 'launch')
         {
-            grunt.log.writeln('Lauch'.yellow + ' profile is enabled.');
+            grunt.log.writeln(options.profile.yellow + ' profile is enabled.');
 
             var build, host;
 
@@ -178,7 +178,7 @@ module.exports = function (grunt)
         }
         else
         {
-            grunt.log.writeln('Package'.green + ' profile is enabled.');
+            grunt.log.writeln(options.profile.green + ' profile is enabled.');
 
             tasks.push(
                 /**

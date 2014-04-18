@@ -122,5 +122,13 @@ module.exports = function (grunt)
         });
     };
 
+    /**
+     * Gets plugin base folder.
+     */
+    utils.plugin_folder = function ()
+    {
+        return path.normalize(path.join(__dirname, '../../'));
+    };
+
     return cep;
 };

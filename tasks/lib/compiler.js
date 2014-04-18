@@ -17,10 +17,10 @@
 module.exports = function (grunt)
 {
     'use strict';
-    var path = require('path');
-    var async = require('async');
-    var _ = require('lodash');
-    var cep = require('./cep.js')(grunt);
+    var path = require('path'),
+        async = require('async'),
+        _ = require('lodash'),
+        cep = require('./cep.js')(grunt);
 
     /**
      * Compiles the specified build.
@@ -65,9 +65,9 @@ module.exports = function (grunt)
                                 '**/*.*');
 
                 // Process and save .debug file (if using debug profile)
-                if (build.launch.enabled)
+                if (build.profile === 'debug' || build.profile === 'launch')
                 {
-                    var dotdebug_file = path.join(cep.folders.plugin(), 'res/.debug');
+                    var dotdebug_file = path.join(cep.utils.plugin_folder(), 'res/.debug');
 
                     if (grunt.file.exists(dotdebug_file))
                     {
