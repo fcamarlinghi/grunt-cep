@@ -154,7 +154,10 @@ module.exports =
             file: 'extension/update.xml',
 
             // Folder containing changelog files
-            changelogs: 'extension/changelogs',
+            changelog_folder: 'extension/changelogs',
+
+            // Changelog file extension
+            changelog_extension: '.txt',
         },
     },
 };

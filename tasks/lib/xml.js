@@ -168,33 +168,29 @@ module.exports = function (grunt)
     {
         grunt.log.write('Generating ' + 'update.xml'.cyan + ' file...');
 
-        var changes_path = path.join(options['package'].update.changelogs, options.extension.version + '.txt');
+        var changes_path = path.join(options['package'].update.changelog_folder, options.extension.version + options['package'].update.changelog_extension),
+            description = '';
 
-        if (!grunt.file.exists(changes_path))
-        {
-            grunt.log.error();
-            grunt.fatal('Could not find changelog file at ' + changes_path.cyan + '.');
-        }
-        else
+        if (grunt.file.exists(changes_path))
         {
             // Parse changelog txt and generate description in update.xml file
-            var description = '<dl>';
+            description = '<dl>';
             description += '<dt><b>' + path.basename(changes_path, '.txt') + '</b></dt>';
             description += '<dd>' + grunt.file.read(changes_path).replace(/\r?\n/g, '<br>') + '</dd>';
             description += '</dl>';
-
-            // Put templating data together
-            var update_data = {
-                'version': options.extension.version,
-                'url': options.extension.update_url + options.extension.basename + '_' + options.extension.version + '.zxp',
-                'description': description,
-            };
-
-            // Process template and save result
-            var processed = grunt.template.process(grunt.file.read(options['package'].update.file), { data: update_data });
-            grunt.file.write(path.join(options.staging, '../', 'update.xml'), processed);
-            grunt.log.ok();
         }
+
+        // Put templating data together
+        var update_data = {
+            'version': options.extension.version,
+            'url': options.extension.update_url + options.extension.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + options.extension.version + '.zxp',
+            'description': description,
+        };
+
+        // Process template and save result
+        var processed = grunt.template.process(grunt.file.read(options['package'].update.file), { data: update_data });
+        grunt.file.write(path.join(options.staging, '../', 'update.xml'), processed);
+        grunt.log.ok();
 
         callback();
     };

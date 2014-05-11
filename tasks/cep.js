@@ -45,7 +45,7 @@ module.exports = function (grunt)
         // SETUP
         // Generate needed configuration settings
         if (!options.extension.basename)
-            options.extension.basename = options.extension.name.replace(/[\s]+/g, '.').toLowerCase();
+            options.extension.basename = options.extension.id.replace(/[\s]+/g, '.').toLowerCase();
 
         // Make sure update_url correctly ends with a dash
         var update_url = options.extension.update_url;
@@ -199,9 +199,7 @@ module.exports = function (grunt)
                     options.extension.icons.mxi = path.basename(options.extension.icons.mxi);
 
                     // Check whether an 'update.xml' file should be generated
-                    options['package'].update.enabled = grunt.file.exists(options['package'].update.file)
-                                                        && grunt.file.exists(options['package'].update.changelogs)
-                                                        && grunt.file.isDir(options['package'].update.changelogs);
+                    options['package'].update.enabled = grunt.file.exists(options['package'].update.file);
 
                     callback();
                 },
@@ -289,7 +287,7 @@ module.exports = function (grunt)
                  */
                 function (callback)
                 {
-                    var final_zxp = path.join(options.staging, '../', options.extension.basename + '_' + options.extension.version + '.zxp');
+                    var final_zxp = path.join(options.staging, '../', options.extension.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + options.extension.version + '.zxp');
 
                     // It seems that the packaging utility does not overwrite files automatically
                     // So we delete the older ZXP if it exists in the folder

@@ -220,10 +220,11 @@ Only used with the <code>package</code> profile, holds information related to ex
 	<tr>
 		<td valign="top"><strong>update</strong></td>
 		<td valign="top">Object</td>
-		<td valign="top"><p>When packaging an extension, the task tries to find a changelog file named as the current extension version (<code>x.x.x.txt</code>) in the <code>changelogs</code> folder. This file is used to fill in the <code>update.xml</code> template file which can be used to support automatic updates for your extension through the Adobe Extension Manager CC application.</p>
+		<td valign="top"><p>When packaging an extension, the task tries to find a changelog file named as the current extension version (<code>x.x.x.txt</code>) in the <code>changelog_folder</code> folder. This file is used to fill in the <code>update.xml</code> template file which can be used to support automatic updates for your extension through the Adobe Extension Manager CC application.</p>
 		<ul>
 		    <li><strong>file</strong> (String): path to the <code>update.xml</code> file template (see below).</li>
-		    <li><strong>changelogs</strong> (String): path to the folder containing changelog files.</li>
+		    <li><strong>changelog_folder</strong> (String): path to the folder containing changelog files (was <code>changelogs</code> before version 0.1.2).</li>
+		    <li><strong>changelog_extension</strong> (String): changelog files extension (added in 0.1.2).</li>
 		</ul>
 		</td>
 	</tr>

@@ -48,6 +48,7 @@
             <Icon Type="Disabled">./CSXS/panel-icons/<%= extension.icons.panel.light.disabled %></Icon>
             <Icon Type="DarkNormal">./CSXS/panel-icons/<%= extension.icons.panel.dark.normal %></Icon>
             <Icon Type="DarkRollOver">./CSXS/panel-icons/<%= extension.icons.panel.dark.hover %></Icon>
+            <Icon Type="DarkDisabled">./CSXS/panel-icons/<%= extension.icons.panel.dark.disabled %></Icon>
           </Icons>
 				</UI>
 			</DispatchInfo>
