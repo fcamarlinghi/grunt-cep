@@ -19,6 +19,9 @@
 // Default extension configuration
 module.exports =
 {
+    /**
+     * General settings
+     */
     // Build profile
     // Valid values include:
     // - debug: builds the extension in debug mode.
@@ -30,31 +33,33 @@ module.exports =
     // Used by grunt-cep as a temporary folder for builds and packaging
     staging: 'staging',
 
-    // Source folder
-    // Input folder containing extension files such as HTML and ExtendScript files
-    source: 'src',
 
-    // Extension
-    // Information about the extension used to fill in file templates, etc.
-    extension: {
-        // Extension version number (format: X.X.X)
-        version: '0.1.0',
+    /** 
+     * Bundle
+     * 
+     * Contains information about the extension bundle, that is the container
+     * for all the extensions specified below.
+     * See: http://www.adobe.com/devnet/creativesuite/articles/multiple-extensions.html
+     * 
+     * If required data is not specified here, grunt-cep will try to load it from the first
+     * extension specified in the 'extensions' array.
+     */
+    bundle: {
+        // Bundle version number (format: X.X.X)
+        version: null,
 
-        // Unique identifier for the extension (used by Creative Cloud and Extension Manager)
-        // Usually provided in a form like "com.developer_name.extension_name"
-        id: '',
+        // Unique identifier for the bundle (used by Creative Cloud and Extension Manager)
+        // Usually provided in a form like "com.developer_name.bundle_name"
+        id: null,
 
-        // Extension name to display in the panel's header and when installing the extension
-        name: '',
+        // Bundle name
+        name: null,
 
         // Author or company name
         author_name: '',
 
-        // Extension root file
-        mainPath: '',
-
-        // Extension ExtendScript root file
-        scriptPath: '',
+        // Bundle icon, used in Extension Manager. Icon should be a 23x23px PNG.
+        mxi_icon: 'bundle/icon-mxi.png',
 
         // URL that contains extension XML update file and packages
         // Extension Manager will check for extension updates at '%update_url/update.xml'
@@ -74,24 +79,50 @@ module.exports =
 
         // License agreement shown when installing the extension (supports HTML markup)
         license_agreement: '',
+    },
+
+
+    /** 
+     * Extensions
+     * 
+     * An array containing information about each single extension that will be added
+     * to the bundle.
+     */
+    extensions: [{
+        // Source folder
+        // Input folder containing extension files such as HTML and ExtendScript files
+        source: 'src/extension',
+
+        // Extension version number (format: X.X.X)
+        version: '0.1.0',
+
+        // Unique identifier for the extension (used by Creative Cloud and Extension Manager)
+        // Usually provided in a form like "com.developer_name.bundle_name.extension_name"
+        id: '',
+
+        // Extension name to display in the panel's header and when installing the extension
+        name: '',
+
+        // Author or company name
+        author_name: '',
+
+        // Extension root file
+        mainPath: '',
+
+        // Extension ExtendScript root file
+        scriptPath: '',
 
         // Extension icons. Each icon should be a 23x23px PNG.
         icons: {
-            // Extension icon, used in Extension Manager
-            mxi: 'extension/icon-mxi.png',
-
-            // Panel icons
-            panel: {
-                light: {
-                    normal: 'extension/panel-icons/icon-light.png',
-                    hover: 'extension/panel-icons/icon-light-hover.png',
-                    disabled: 'extension/panel-icons/icon-light-disabled.png'
-                },
-                dark: {
-                    normal: 'extension/panel-icons/icon-dark.png',
-                    hover: 'extension/panel-icons/icon-dark-hover.png',
-                    disabled: 'extension/panel-icons/icon-dark-disabled.png'
-                },
+            light: {
+                normal: 'bundle/extension/icons/icon-light.png',
+                hover: 'bundle/extension/icons/icon-light-hover.png',
+                disabled: 'bundle/extension/icons/icon-light-disabled.png'
+            },
+            dark: {
+                normal: 'bundle/extension/icons/icon-dark.png',
+                hover: 'bundle/extension/icons/icon-dark-hover.png',
+                disabled: 'bundle/extension/icons/icon-dark-disabled.png'
             },
         },
 
@@ -101,18 +132,26 @@ module.exports =
             min: { width: 320, height: 300 },
             max: { width: 800, height: 2400 },
         },
-    },
+    }],
 
-    // Builds
-    // A list of individual builds that should be executed, each one
-    // resulting in a single .zxp that will be bundle in the final *.zxp 
-    // installer. This is useful for custom configuration by product.
-    // Each object in this list extends the main project configuration,
-    // giving you the ability to override base configuration values.
+
+    /** 
+     * Builds
+     * 
+     * A list of individual builds that should be executed, each one
+     * resulting in a single .zxp that will be bundle in the final *.zxp 
+     * installer. This is useful for custom configuration by product.
+     * 
+     * Each object in this list extends the main project configuration,
+     * giving you the ability to override base configuration values.
+     */
     builds: [
         {
-            // Manifest file template
-            manifest: 'manifest.cc.xml',
+            // Add bundle manifest file template to bundle
+            bundle: { manifest: 'bundle/manifest.bundle.cc.xml' },
+
+            // Add a default extension manifest file to each extension
+            extensions: [{ manifest: 'bundle/manifest.extension.cc.xml' }],
 
             // Supported products
             products: [],
@@ -122,8 +161,12 @@ module.exports =
         },
     ],
 
-    // Launch
-    // Options used to launch debug in host application
+
+    /** 
+     * Launch
+     * 
+     * Options used to launch debug in host application.
+     */
     launch: {
         // Host application to launch, defaults to the first one
         // specified in the first build of the 'builds' array
@@ -133,16 +176,21 @@ module.exports =
         family: 'CC',
     },
 
-    // Package
-    // Options related to extension packaging and distribution
+
+
+    /** 
+     * Package
+     * 
+     * Options related to bundle packaging and distribution.
+     */
     'package': {
         // MXI file template
-        mxi: 'extension/template.mxi',
+        mxi: 'bundle/template.mxi',
 
-        // Certificate used to sign the extension package
+        // Certificate used to sign the bundle package
         certificate: {
             // Certificate file
-            file: 'extension/certificate.p12',
+            file: 'bundle/certificate.p12',
 
             // Certificate password
             password: 'example_password',
@@ -151,10 +199,10 @@ module.exports =
         // Automatic update setup
         update: {
             // Update.xml file template
-            file: 'extension/update.xml',
+            file: 'bundle/update.xml',
 
             // Folder containing changelog files
-            changelog_folder: 'extension/changelogs',
+            changelog_folder: 'bundle/changelogs',
 
             // Changelog file extension
             changelog_extension: '.txt',

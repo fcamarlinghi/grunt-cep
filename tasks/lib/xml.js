@@ -26,25 +26,51 @@ module.exports = function (grunt)
      */
     var manifest = function (callback, build)
     {
-        // Validate manifest
-        grunt.verbose.or.write('Loading extension manifest template...');
+        var bundle = build.bundle;
 
-        if (!grunt.file.exists(build.manifest))
+        // Validate manifest
+        grunt.verbose.or.write('Loading bundle manifest template...');
+
+        if (!grunt.file.exists(bundle.manifest))
         {
             grunt.verbose.or.error();
-            grunt.fatal('Unable to read extension manifest file template at ' + build.manifest.cyan + '.');
+            grunt.fatal('Unable to read bundle manifest file template at ' + bundle.manifest.cyan + '.');
         }
         else
             grunt.verbose.or.ok();
 
-        // Generate template data
-        grunt.verbose.or.write('Generating extension manifest...');
+        // Generate manifest data for each extension
+        var extension_list_manifest = [],
+            extensions_manifest = [];
 
-        // Get base data
+        grunt.verbose.or.write('Generating extension manifest data...');
+
+        build.extensions.forEach(function (extension)
+        {
+            var data = _.extend({}, { 'extension': extension, 'build': build, });
+
+            // <ExtensionList>
+            extension_list_manifest.push(grunt.template.process('<Extension Id="<%= extension.id %>" Version="<%= extension.version %>" />', { data: data, delimiters: 'cep' }));
+
+            // <Extensions>
+            if (!grunt.file.exists(extension.manifest))
+            {
+                grunt.verbose.or.error();
+                grunt.fatal('Unable to read extension manifest file template at ' + extension.manifest.cyan + ' for ' + extension.id + '.');
+            }
+
+            extensions_manifest.push(grunt.template.process(grunt.file.read(extension.manifest), { data: data, delimiters: 'cep' }));
+        });
+
+        grunt.verbose.or.ok();
+
+        // Generate bundle manifest
+        grunt.verbose.or.write('Generating bundle manifest...');
+
         // <Host> list
-        var list_hosts = [];
-        var products = build.products;
-        var families = build.families;
+        var list_hosts = [],
+            products = build.products,
+            families = build.families;
 
         if (products)
         {
@@ -60,15 +86,19 @@ module.exports = function (grunt)
             }
         }
 
-        // Process and save manifest file
+        // Templating
         var dest = path.join(build.staging, '/CSXS/manifest.xml');
+
         var data = _.extend({},
             {
-                'extension': build.extension,
+                'bundle': bundle,
+                'build': build,
+                'extension_list': extension_list_manifest.join('\n\t\t\t'),
+                'extensions': extensions_manifest.join('\n\t\t\t'),
                 'hosts': list_hosts.join('\n\t\t\t'),
             });
 
-        var processed = grunt.template.process(grunt.file.read(build.manifest), { data: data, delimiters: 'cep' });
+        var processed = grunt.template.process(grunt.file.read(bundle.manifest), { data: data, delimiters: 'cep' });
         grunt.file.write(dest, processed);
 
         grunt.verbose.or.ok();

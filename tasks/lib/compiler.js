@@ -25,7 +25,7 @@ module.exports = function (grunt)
     /**
      * Compiles the specified build.
      */
-    var compile = function (callback, build)
+    var compile = function (callback, extension, build)
     {
         var tasks = [];
         grunt.log.writeln().writeln(('Compiling extension for Adobe ' + build.products.join(', ').cyan + ' - ' + build.families.join(', ').cyan + '...').bold);
@@ -37,17 +37,17 @@ module.exports = function (grunt)
             function (callback)
             {
                 // Validate input/output files
-                if (typeof build.staging !== 'string' || !build.staging.length)
-                    grunt.fatal('Invalid "staging" folder: ' + String(build.staging).cyan + '.');
+                if (typeof extension.staging !== 'string' || !extension.staging.length)
+                    grunt.fatal('Invalid "staging" folder: ' + String(extension.staging).cyan + '.');
 
-                if (typeof build.source !== 'string' || !build.source.length)
-                    grunt.fatal('Invalid "source" folder: ' + String(build.source).cyan + '.');
+                if (typeof extension.source !== 'string' || !extension.source.length)
+                    grunt.fatal('Invalid "source" folder: ' + String(extension.source).cyan + '.');
 
                 // Clean current output folder
-                if (grunt.file.exists(build.staging) && grunt.file.isDir(build.staging))
-                    grunt.file.delete(build.staging, { force: true });
+                if (grunt.file.exists(extension.staging) && grunt.file.isDir(extension.staging))
+                    grunt.file.delete(extension.staging, { force: true });
 
-                grunt.file.mkdir(build.staging);
+                grunt.file.mkdir(extension.staging);
                 callback();
             },
 
@@ -57,14 +57,14 @@ module.exports = function (grunt)
             function (callback)
             {
                 // Copy all the content of the HTML folder over to the output folder
-                var message = 'Copying ' + build.source + ' folder...';
+                var message = 'Copying ' + extension.source + ' folder...';
                 grunt.verbose.writeln(message).or.write(message);
 
-                cep.utils.copy({ cwd: build.source },
-                                build.staging + '/',
+                cep.utils.copy({ cwd: extension.source },
+                                extension.staging + '/',
                                 '**/*.*');
 
-                // Process and save .debug file (if using debug profile)
+                // Process and save .debug file (if using a debug profile)
                 if (build.profile === 'debug' || build.profile === 'launch')
                 {
                     var dotdebug_file = path.join(cep.utils.plugin_folder(), 'res/.debug');
@@ -73,10 +73,10 @@ module.exports = function (grunt)
                     {
                         var data = _.extend({},
                         {
-                            'extension': build.extension,
+                            'extension': extension,
                         });
                         var processed = grunt.template.process(grunt.file.read(dotdebug_file), { data: data });
-                        grunt.file.write(path.join(build.staging, '.debug'), processed);
+                        grunt.file.write(path.join(extension.staging, '.debug'), processed);
                     }
                 }
 
@@ -92,43 +92,34 @@ module.exports = function (grunt)
                 var message = 'Copying panel icons...';
                 grunt.verbose.writeln(message).or.write(message);
 
-                var dest = path.join(build.staging, 'CSXS', 'panel-icons'),
-                    panel = build.extension.icons.panel,
+                var dest = path.join(build.staging, 'CSXS', extension.basename, 'icons'),
+                    icons = extension.icons,
                     icon, newIcon;
 
-                for (icon in panel.light)
+                for (icon in icons.light)
                 {
-                    if (panel.light.hasOwnProperty(icon))
+                    if (icons.light.hasOwnProperty(icon))
                     {
-                        newIcon = path.basename(panel.light[icon]);
-                        grunt.file.copy(panel.light[icon], path.join(dest, newIcon));
-                        panel.light[icon] = newIcon;
+                        newIcon = path.basename(icons.light[icon]);
+                        grunt.file.copy(icons.light[icon], path.join(dest, newIcon));
+                        icons.light[icon] = newIcon;
                     }
                 }
 
-                for (icon in panel.dark)
+                for (icon in icons.dark)
                 {
-                    if (panel.dark.hasOwnProperty(icon))
+                    if (icons.dark.hasOwnProperty(icon))
                     {
-                        newIcon = path.basename(panel.dark[icon]);
-                        grunt.file.copy(panel.dark[icon], path.join(dest, newIcon));
-                        panel.dark[icon] = newIcon;
+                        newIcon = path.basename(icons.dark[icon]);
+                        grunt.file.copy(icons.dark[icon], path.join(dest, newIcon));
+                        icons.dark[icon] = newIcon;
                     }
                 }
 
-                build.extension.icons.panel = panel;
+                extension.icons = icons;
 
                 grunt.verbose.or.ok();
                 callback();
-            },
-
-            /**
-             * Generate appropriate manifest file.
-             */
-            function (callback)
-            {
-                var xml = require('../lib/xml.js')(grunt);
-                xml.manifest(callback, build);
             }
         );
 

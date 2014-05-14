@@ -43,14 +43,28 @@ module.exports = function (grunt)
 
 
         // SETUP
-        // Generate needed configuration settings
-        if (!options.extension.basename)
-            options.extension.basename = options.extension.id.replace(/[\s]+/g, '.').toLowerCase();
+        // Make sure bundle information is correct, or fill it in
+        // using data from the first extension
+        options.bundle = _.extend(
+            options.bundle,
+            _.pick(options.extensions[0], 'version', 'id', 'name', 'author_name'),
+            function (a, b) { return typeof a !== 'string' || !a.length ? b : a; }
+        );
+
+        if (!options.bundle.basename)
+            options.bundle.basename = options.bundle.id.replace(/[\s]+/g, '.').toLowerCase();
 
         // Make sure update_url correctly ends with a dash
-        var update_url = options.extension.update_url;
+        var update_url = options.bundle.update_url;
         if (update_url.length && update_url.indexOf('/', update_url.length - 1) === -1)
-            options.extension.update_url = update_url + '/';
+            options.bundle.update_url = update_url + '/';
+
+        // Add extension settings
+        options.extensions.forEach(function (extension)
+        {
+            if (!extension.basename)
+                extension.basename = extension.id.replace(/[\s]+/g, '.').toLowerCase();
+        })
 
         // Set some useful global variables
         global.IS_WINDOWS = !!process.platform.match(/^win/);
@@ -59,7 +73,7 @@ module.exports = function (grunt)
 
 
         // EXECUTION
-        // Check whether we should launch debug or package the full extension
+        // Check whether we should launch debug or package the full bundle
         if (options.profile === 'debug' || options.profile === 'launch')
         {
             grunt.log.writeln(options.profile.yellow + ' profile is enabled.');
@@ -121,11 +135,14 @@ module.exports = function (grunt)
                     }
                     else
                     {
-                        build = _.merge({}, options, build);
+                        // Override bundle and extension data with build-specific information
+                        build = _.merge(options, build);
+                        grunt.log.writeln(JSON.stringify(build));
                         build.launch.product = product;
                         build.launch.family = family;
                         callback();
                     }
+
                 },
 
                 /**
@@ -154,16 +171,37 @@ module.exports = function (grunt)
                 },
 
                 /**
-                 * Compile extension.
+                 * Compile extensions.
                  */
                 function (callback)
                 {
-                    build.extension.id = build.extension.id + '.debug';
-                    build.extension.name = build.extension.name + ' (debug)';
                     build.staging = path.join(build.staging, 'debug');
+                    build.id = build.id + '.debug';
+                    build.name = build.name + ' (debug)';
 
-                    // Execute only the build that is needed for debugging
-                    compiler.compile(callback, build);
+                    var compile_tasks = build.extensions.map(function (extension)
+                    {
+                        return function (callback)
+                        {
+                            extension.id = extension.id + '.debug';
+                            extension.name = extension.name + ' (debug)';
+                            extension.staging = path.join(build.staging, extension.basename);
+
+                            // Execute only the build that is needed for debugging
+                            compiler.compile(callback, extension, build);
+                        };
+                    });
+
+                    // Run child tasks
+                    async.series(compile_tasks, function (err, result) { callback(); })
+                },
+
+                /**
+                 * Generate appropriate manifest file.
+                 */
+                function (callback)
+                {
+                    xml.manifest(callback, build);
                 },
 
                 /**
