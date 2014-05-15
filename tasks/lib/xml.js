@@ -29,28 +29,24 @@ module.exports = function (grunt)
         var bundle = build.bundle;
 
         // Validate manifest
-        grunt.verbose.or.write('Loading bundle manifest template...');
+        grunt.verbose.or.write('Generating bundle manifest...');
 
         if (!grunt.file.exists(bundle.manifest))
         {
             grunt.verbose.or.error();
             grunt.fatal('Unable to read bundle manifest file template at ' + bundle.manifest.cyan + '.');
         }
-        else
-            grunt.verbose.or.ok();
 
         // Generate manifest data for each extension
         var extension_list_manifest = [],
             extensions_manifest = [];
-
-        grunt.verbose.or.write('Generating extension manifest data...');
 
         build.extensions.forEach(function (extension)
         {
             var data = _.extend({}, { 'extension': extension, 'build': build, });
 
             // <ExtensionList>
-            extension_list_manifest.push(grunt.template.process('<Extension Id="<%= extension.id %>" Version="<%= extension.version %>" />', { data: data, delimiters: 'cep' }));
+            extension_list_manifest.push(grunt.template.process('<Extension Id="<%= extension.id %>" Version="<%= extension.version %>" />', { data: data}));
 
             // <Extensions>
             if (!grunt.file.exists(extension.manifest))
@@ -59,14 +55,10 @@ module.exports = function (grunt)
                 grunt.fatal('Unable to read extension manifest file template at ' + extension.manifest.cyan + ' for ' + extension.id + '.');
             }
 
-            extensions_manifest.push(grunt.template.process(grunt.file.read(extension.manifest), { data: data, delimiters: 'cep' }));
+            extensions_manifest.push(grunt.template.process(grunt.file.read(extension.manifest), { data: data}));
         });
 
-        grunt.verbose.or.ok();
-
         // Generate bundle manifest
-        grunt.verbose.or.write('Generating bundle manifest...');
-
         // <Host> list
         var list_hosts = [],
             products = build.products,
@@ -92,13 +84,12 @@ module.exports = function (grunt)
         var data = _.extend({},
             {
                 'bundle': bundle,
-                'build': build,
                 'extension_list': extension_list_manifest.join('\n\t\t\t'),
                 'extensions': extensions_manifest.join('\n\t\t\t'),
                 'hosts': list_hosts.join('\n\t\t\t'),
             });
 
-        var processed = grunt.template.process(grunt.file.read(bundle.manifest), { data: data, delimiters: 'cep' });
+        var processed = grunt.template.process(grunt.file.read(bundle.manifest), { data: data});
         grunt.file.write(dest, processed);
 
         grunt.verbose.or.ok();
@@ -116,7 +107,7 @@ module.exports = function (grunt)
                 files: [],
                 products: []
             },
-            mxi_filename = options.extension.basename + '.mxi';
+            mxi_filename = options.bundle.basename + '.mxi';
 
         grunt.log.write('Generating ' + mxi_filename.cyan + ' file from template...');
 
@@ -177,11 +168,11 @@ module.exports = function (grunt)
         // Fill in .mxi template
         data.files = data.files.join('\n\t\t');
         data.products = data.products.join('\n\t\t');
-        data = _.extend(data, options.extension);
+        data = _.merge(_.extend({}, data), options);
 
         // Setup 'update.xml', if needed
-        if (options['package'].update.enabled && data.update_url.length)
-            data.update_url += 'update.xml';
+        if (options['package'].update.enabled)
+            data.bundle.update_url += 'update.xml';
 
         // Process template
         var processed = grunt.template.process(grunt.file.read(options['package'].mxi), { data: data });
@@ -198,7 +189,7 @@ module.exports = function (grunt)
     {
         grunt.log.write('Generating ' + 'update.xml'.cyan + ' file...');
 
-        var changes_path = path.join(options['package'].update.changelog_folder, options.extension.version + options['package'].update.changelog_extension),
+        var changes_path = path.join(options['package'].update.changelog_folder, options.bundle.version + options['package'].update.changelog_extension),
             description = '';
 
         if (grunt.file.exists(changes_path))
@@ -211,11 +202,9 @@ module.exports = function (grunt)
         }
 
         // Put templating data together
-        var update_data = {
-            'version': options.extension.version,
-            'url': options.extension.update_url + options.extension.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + options.extension.version + '.zxp',
-            'description': description,
-        };
+        var update_data = _.extend({}, options, {
+            'download_url': options.bundle.update_url + options.bundle.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + options.bundle.version + '.zxp',
+        });
 
         // Process template and save result
         var processed = grunt.template.process(grunt.file.read(options['package'].update.file), { data: update_data });

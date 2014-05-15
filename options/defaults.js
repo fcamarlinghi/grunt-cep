@@ -33,6 +33,10 @@ module.exports =
     // Used by grunt-cep as a temporary folder for builds and packaging
     staging: 'staging',
 
+    // Source folder
+    // Input folder containing extension files such as HTML and ExtendScript files
+    source: 'src',
+
 
     /** 
      * Bundle
@@ -89,10 +93,6 @@ module.exports =
      * to the bundle.
      */
     extensions: [{
-        // Source folder
-        // Input folder containing extension files such as HTML and ExtendScript files
-        source: 'src/extension',
-
         // Extension version number (format: X.X.X)
         version: '0.1.0',
 
@@ -115,14 +115,14 @@ module.exports =
         // Extension icons. Each icon should be a 23x23px PNG.
         icons: {
             light: {
-                normal: 'bundle/extension/icons/icon-light.png',
-                hover: 'bundle/extension/icons/icon-light-hover.png',
-                disabled: 'bundle/extension/icons/icon-light-disabled.png'
+                normal: '',
+                hover: '',
+                disabled: '',
             },
             dark: {
-                normal: 'bundle/extension/icons/icon-dark.png',
-                hover: 'bundle/extension/icons/icon-dark-hover.png',
-                disabled: 'bundle/extension/icons/icon-dark-disabled.png'
+                normal: '',
+                hover: '',
+                disabled: '',
             },
         },
 

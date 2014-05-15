@@ -25,10 +25,10 @@ module.exports = function (grunt)
     /**
      * Compiles the specified build.
      */
-    var compile = function (callback, extension, build)
+    var compile = function (callback, build)
     {
         var tasks = [];
-        grunt.log.writeln().writeln(('Compiling extension for Adobe ' + build.products.join(', ').cyan + ' - ' + build.families.join(', ').cyan + '...').bold);
+        grunt.log.writeln().writeln(('Compiling bundle for Adobe ' + build.products.join(', ').cyan + ' - ' + build.families.join(', ').cyan + '...').bold);
 
         tasks.push(
             /**
@@ -37,17 +37,17 @@ module.exports = function (grunt)
             function (callback)
             {
                 // Validate input/output files
-                if (typeof extension.staging !== 'string' || !extension.staging.length)
-                    grunt.fatal('Invalid "staging" folder: ' + String(extension.staging).cyan + '.');
+                if (typeof build.staging !== 'string' || !build.staging.length)
+                    grunt.fatal('Invalid "staging" folder: ' + String(build.staging).cyan + '.');
 
-                if (typeof extension.source !== 'string' || !extension.source.length)
-                    grunt.fatal('Invalid "source" folder: ' + String(extension.source).cyan + '.');
+                if (typeof build.source !== 'string' || !build.source.length)
+                    grunt.fatal('Invalid "source" folder: ' + String(build.source).cyan + '.');
 
                 // Clean current output folder
-                if (grunt.file.exists(extension.staging) && grunt.file.isDir(extension.staging))
-                    grunt.file.delete(extension.staging, { force: true });
+                if (grunt.file.exists(build.staging) && grunt.file.isDir(build.staging))
+                    grunt.file.delete(build.staging, { force: true });
 
-                grunt.file.mkdir(extension.staging);
+                grunt.file.mkdir(build.staging);
                 callback();
             },
 
@@ -56,74 +56,44 @@ module.exports = function (grunt)
              */
             function (callback)
             {
-                // Copy all the content of the HTML folder over to the output folder
-                var message = 'Copying ' + extension.source + ' folder...';
+                // Copy all the content of the source folder over to the output folder
+                var message = 'Copying ' + build.source.cyan + ' folder...';
                 grunt.verbose.writeln(message).or.write(message);
 
-                cep.utils.copy({ cwd: extension.source },
-                                extension.staging + '/',
-                                '**/*.*');
+                cep.utils.copy({ cwd: build.source }, build.staging + '/', '**/*.*');
+                grunt.verbose.or.ok();
+                callback();
+            },
 
-                // Process and save .debug file (if using a debug profile)
+            /**
+             * Generate .debug file.
+             */
+            function (callback)
+            {
                 if (build.profile === 'debug' || build.profile === 'launch')
                 {
                     var dotdebug_file = path.join(cep.utils.plugin_folder(), 'res/.debug');
 
                     if (grunt.file.exists(dotdebug_file))
                     {
-                        var data = _.extend({},
-                        {
-                            'extension': extension,
-                        });
-                        var processed = grunt.template.process(grunt.file.read(dotdebug_file), { data: data });
-                        grunt.file.write(path.join(extension.staging, '.debug'), processed);
+                        var data = { 'extensions': build.extensions, },
+                            processed = grunt.template.process(grunt.file.read(dotdebug_file), { data: data });
+
+                        grunt.file.write(path.join(build.staging, '.debug'), processed);
                     }
                 }
 
-                grunt.verbose.or.ok();
                 callback();
             },
 
             /**
-             * Copy icons to output folder.
+             * Generate appropriate manifest file.
              */
             function (callback)
             {
-                var message = 'Copying panel icons...';
-                grunt.verbose.writeln(message).or.write(message);
-
-                var dest = path.join(build.staging, 'CSXS', extension.basename, 'icons'),
-                    icons = extension.icons,
-                    icon, newIcon;
-
-                for (icon in icons.light)
-                {
-                    if (icons.light.hasOwnProperty(icon))
-                    {
-                        newIcon = path.basename(icons.light[icon]);
-                        grunt.file.copy(icons.light[icon], path.join(dest, newIcon));
-                        icons.light[icon] = newIcon;
-                    }
-                }
-
-                for (icon in icons.dark)
-                {
-                    if (icons.dark.hasOwnProperty(icon))
-                    {
-                        newIcon = path.basename(icons.dark[icon]);
-                        grunt.file.copy(icons.dark[icon], path.join(dest, newIcon));
-                        icons.dark[icon] = newIcon;
-                    }
-                }
-
-                extension.icons = icons;
-
-                grunt.verbose.or.ok();
-                callback();
+                require('./xml')(grunt).manifest(callback, build);
             }
         );
-
-        //grunt.log.writeln(JSON.stringify(build));
 
         // Run child tasks
         async.series(tasks, function (err, result) { callback(err, result); });
@@ -168,7 +138,7 @@ module.exports = function (grunt)
                 }
 
                 // Extension install path
-                launch_config.install_path = path.join(folder_servicemgr, build.extension.basename) + '.debug';
+                launch_config.install_path = path.join(folder_servicemgr, build.bundle.basename) + '.debug';
 
                 // Application folder
                 var folder_name = launch_config.host.hasOwnProperty('folder') ? launch_config.host.folder : '/Adobe ' + launch_config.host.name + ' ' + launch_config.family;

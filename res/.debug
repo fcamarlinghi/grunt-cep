@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionList>
-  <Extension Id="<%= extension.id %>">
+  <% for (var i = 0; i < extensions.length; i++) { %>
+  <Extension Id="<%= extensions[i].id %>">
     <HostList>
       <!-- Photoshop -->
       <Host Name="PHXS" Port="8088"/>
@@ -21,4 +22,5 @@
       <Host Name="FLPR" Port="8088" />
     </HostList>
   </Extension>
+  <% } %>
 </ExtensionList>

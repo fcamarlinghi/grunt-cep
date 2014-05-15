@@ -25,12 +25,12 @@
 				</MinSize>
 			</Geometry>
       <Icons>
-        <Icon Type="Normal">./CSXS/<%= extension.basename %>/icons/<%= extension.icons.light.normal %></Icon>
-        <Icon Type="RollOver">./CSXS/<%= extension.basename %>/icons/<%= extension.icons.light.hover %></Icon>
-        <Icon Type="Disabled">./CSXS/<%= extension.basename %>/icons/<%= extension.icons.light.disabled %></Icon>
-        <Icon Type="DarkNormal">./CSXS/<%= extension.basename %>/icons/<%= extension.icons.dark.normal %></Icon>
-        <Icon Type="DarkRollOver">./CSXS/<%= extension.basename %>/icons/<%= extension.icons.dark.hover %></Icon>
-        <Icon Type="DarkDisabled">./CSXS/<%= extension.basename %>/icons/<%= extension.icons.dark.disabled %></Icon>
+        <Icon Type="Normal">./CSXS/<%= extension.basename %>/<%= extension.icons.light.normal %></Icon>
+        <Icon Type="RollOver">./CSXS/<%= extension.basename %>/<%= extension.icons.light.hover %></Icon>
+        <Icon Type="Disabled">./CSXS/<%= extension.basename %>/<%= extension.icons.light.disabled %></Icon>
+        <Icon Type="DarkNormal">./CSXS/<%= extension.basename %>/<%= extension.icons.dark.normal %></Icon>
+        <Icon Type="DarkRollOver">./CSXS/<%= extension.basename %>/<%= extension.icons.dark.hover %></Icon>
+        <Icon Type="DarkDisabled">./CSXS/<%= extension.basename %>/<%= extension.icons.dark.disabled %></Icon>
       </Icons>
 		</UI>
 	</DispatchInfo>

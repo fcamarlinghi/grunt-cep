@@ -137,7 +137,7 @@ module.exports = function (grunt)
                     {
                         // Override bundle and extension data with build-specific information
                         build = _.merge(options, build);
-                        grunt.log.writeln(JSON.stringify(build));
+                        //grunt.log.writeln(JSON.stringify(build));
                         build.launch.product = product;
                         build.launch.family = family;
                         callback();
@@ -171,37 +171,25 @@ module.exports = function (grunt)
                 },
 
                 /**
-                 * Compile extensions.
+                 * Prepare and compile bundle.
                  */
                 function (callback)
                 {
+                    // Set staging folder to 'debug'
                     build.staging = path.join(build.staging, 'debug');
-                    build.id = build.id + '.debug';
-                    build.name = build.name + ' (debug)';
 
-                    var compile_tasks = build.extensions.map(function (extension)
+                    // Append debug flag to bundle and extensions
+                    build.bundle.id = build.bundle.id + '.debug';
+                    build.bundle.name = build.bundle.name + ' (debug)';
+
+                    build.extensions.forEach(function (extension)
                     {
-                        return function (callback)
-                        {
-                            extension.id = extension.id + '.debug';
-                            extension.name = extension.name + ' (debug)';
-                            extension.staging = path.join(build.staging, extension.basename);
-
-                            // Execute only the build that is needed for debugging
-                            compiler.compile(callback, extension, build);
-                        };
+                        extension.id = extension.id + '.debug';
+                        extension.name = extension.name + ' (debug)';
                     });
 
-                    // Run child tasks
-                    async.series(compile_tasks, function (err, result) { callback(); })
-                },
-
-                /**
-                 * Generate appropriate manifest file.
-                 */
-                function (callback)
-                {
-                    xml.manifest(callback, build);
+                    // Execute only the build that is needed for debugging
+                    compiler.compile(callback, build);
                 },
 
                 /**
@@ -224,7 +212,7 @@ module.exports = function (grunt)
                  */
                 function (callback)
                 {
-                    // Create temporary 'package' folder
+                    // Create temporary 'package' folder and set it as the staging folder
                     options.staging = path.join(options.staging, 'package');
 
                     if (grunt.file.exists(options.staging))
@@ -233,8 +221,8 @@ module.exports = function (grunt)
                     grunt.file.mkdir(options.staging);
 
                     // Copy MXI icon over and update icon path
-                    grunt.file.copy(options.extension.icons.mxi, path.join(options.staging, path.basename(options.extension.icons.mxi)));
-                    options.extension.icons.mxi = path.basename(options.extension.icons.mxi);
+                    grunt.file.copy(options.bundle.mxi_icon, path.join(options.staging, path.basename(options.bundle.mxi_icon)));
+                    options.bundle.mxi_icon = path.basename(options.bundle.mxi_icon);
 
                     // Check whether an 'update.xml' file should be generated
                     options['package'].update.enabled = grunt.file.exists(options['package'].update.file);
@@ -249,7 +237,7 @@ module.exports = function (grunt)
                 {
                     // Validate config
                     if (!grunt.file.exists(options['package'].certificate.file))
-                        require('./certificate.js')(grunt).generate(callback, options);
+                        require('./zxp.js')(grunt).certificate(callback, options);
                     else
                         callback();
                 },
@@ -281,7 +269,7 @@ module.exports = function (grunt)
                         // Compiler
                         tasks.push(function (callback)
                         {
-                            compiler.compile(callback, _.merge({}, options, build));
+                            compiler.compile(callback, _.merge(_.extend({}, options), build));
                         });
 
                         // ZXP
@@ -325,7 +313,7 @@ module.exports = function (grunt)
                  */
                 function (callback)
                 {
-                    var final_zxp = path.join(options.staging, '../', options.extension.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + options.extension.version + '.zxp');
+                    var final_zxp = path.join(options.staging, '../', options.bundle.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + options.bundle.version + '.zxp');
 
                     // It seems that the packaging utility does not overwrite files automatically
                     // So we delete the older ZXP if it exists in the folder
