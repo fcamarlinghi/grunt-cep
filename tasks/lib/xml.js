@@ -31,7 +31,12 @@ module.exports = function (grunt)
         // Validate manifest
         grunt.verbose.or.write('Generating bundle manifest...');
 
-        if (!grunt.file.exists(bundle.manifest))
+        if (!bundle.manifest)
+        {
+            grunt.verbose.or.error();
+            grunt.fatal('No bundle manifest file specified.');
+        }
+        else if (!grunt.file.exists(bundle.manifest))
         {
             grunt.verbose.or.error();
             grunt.fatal('Unable to read bundle manifest file template at ' + bundle.manifest.cyan + '.');
@@ -52,7 +57,7 @@ module.exports = function (grunt)
             if (!extension.manifest)
             {
                 grunt.verbose.or.error();
-                grunt.fatal('No manifest file specified for ' + extension.id + '.');
+                grunt.fatal('No extension manifest file specified for ' + extension.id + '.');
             }
             else if (!grunt.file.exists(extension.manifest))
             {
