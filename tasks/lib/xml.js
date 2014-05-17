@@ -46,16 +46,21 @@ module.exports = function (grunt)
             var data = _.extend({}, { 'extension': extension, 'build': build, });
 
             // <ExtensionList>
-            extension_list_manifest.push(grunt.template.process('<Extension Id="<%= extension.id %>" Version="<%= extension.version %>" />', { data: data}));
+            extension_list_manifest.push(grunt.template.process('<Extension Id="<%= extension.id %>" Version="<%= extension.version %>" />', { data: data }));
 
             // <Extensions>
-            if (!grunt.file.exists(extension.manifest))
+            if (!extension.manifest)
+            {
+                grunt.verbose.or.error();
+                grunt.fatal('No manifest file specified for ' + extension.id + '.');
+            }
+            else if (!grunt.file.exists(extension.manifest))
             {
                 grunt.verbose.or.error();
                 grunt.fatal('Unable to read extension manifest file template at ' + extension.manifest.cyan + ' for ' + extension.id + '.');
             }
 
-            extensions_manifest.push(grunt.template.process(grunt.file.read(extension.manifest), { data: data}));
+            extensions_manifest.push(grunt.template.process(grunt.file.read(extension.manifest), { data: data }));
         });
 
         // Generate bundle manifest
@@ -89,7 +94,7 @@ module.exports = function (grunt)
                 'hosts': list_hosts.join('\n\t\t\t'),
             });
 
-        var processed = grunt.template.process(grunt.file.read(bundle.manifest), { data: data});
+        var processed = grunt.template.process(grunt.file.read(bundle.manifest), { data: data });
         grunt.file.write(dest, processed);
 
         grunt.verbose.or.ok();
