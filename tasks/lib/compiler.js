@@ -72,15 +72,26 @@ module.exports = function (grunt)
             {
                 if (build.profile === 'debug' || build.profile === 'launch')
                 {
+                    var message = 'Generating ' + '.debug'.cyan + ' file...';
+                    grunt.verbose.writeln(message).or.write(message);
+
                     var dotdebug_file = path.join(cep.utils.plugin_folder(), 'res/.debug');
 
                     if (grunt.file.exists(dotdebug_file))
                     {
-                        var data = { 'extensions': build.extensions, },
+                        if (typeof build.launch.hostPort !== 'number' || build.launch.hostPort < 0)
+                        {
+                            grunt.verbose.or.error();
+                            grunt.fatal('Invalid host debug port ' + build.launch.hostPort + '.');
+                        }
+
+                        var data = { 'build': build },
                             processed = grunt.template.process(grunt.file.read(dotdebug_file), { data: data });
 
                         grunt.file.write(path.join(build.staging, '.debug'), processed);
                     }
+
+                    grunt.verbose.or.ok();
                 }
 
                 callback();

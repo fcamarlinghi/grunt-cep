@@ -139,7 +139,7 @@ module.exports =
      * Builds
      * 
      * A list of individual builds that should be executed, each one
-     * resulting in a single .zxp that will be bundle in the final *.zxp 
+     * resulting in a single .zxp that will be bundled in the final *.zxp 
      * installer. This is useful for custom configuration by product.
      * 
      * Each object in this list extends the main project configuration,
@@ -174,6 +174,11 @@ module.exports =
 
         // Currently unused
         family: 'CC',
+
+        // Default host port used for debug. If bundling multiple
+        // extensions, this will be used for the first one, with
+        // other extensions using incremental ports (i.e. 8089, 8090, etc.)
+        hostPort: 8088,
     },
 
 
