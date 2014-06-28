@@ -28,7 +28,7 @@ module.exports = function (grunt)
     var compile = function (callback, build)
     {
         var tasks = [];
-        grunt.log.writeln().writeln(('Compiling extension for Adobe ' + build.products.join(', ').cyan + ' - ' + build.families.join(', ').cyan + '...').bold);
+        grunt.log.writeln().writeln(('Compiling bundle for Adobe ' + build.products.join(', ').cyan + ' - ' + build.families.join(', ').cyan + '...').bold);
 
         tasks.push(
             /**
@@ -56,69 +56,44 @@ module.exports = function (grunt)
              */
             function (callback)
             {
-                // Copy all the content of the HTML folder over to the output folder
-                var message = 'Copying ' + build.source + ' folder...';
+                // Copy all the content of the source folder over to the output folder
+                var message = 'Copying ' + build.source.cyan + ' folder...';
                 grunt.verbose.writeln(message).or.write(message);
 
-                cep.utils.copy({ cwd: build.source },
-                                build.staging + '/',
-                                '**/*.*');
-
-                // Process and save .debug file (if using debug profile)
-                if (build.profile === 'debug' || build.profile === 'launch')
-                {
-                    var dotdebug_file = path.join(cep.utils.plugin_folder(), 'res/.debug');
-
-                    if (grunt.file.exists(dotdebug_file))
-                    {
-                        var data = _.extend({},
-                        {
-                            'extension': build.extension,
-                        });
-                        var processed = grunt.template.process(grunt.file.read(dotdebug_file), { data: data });
-                        grunt.file.write(path.join(build.staging, '.debug'), processed);
-                    }
-                }
-
+                cep.utils.copy({ cwd: build.source }, build.staging + '/', '**/*.*');
                 grunt.verbose.or.ok();
                 callback();
             },
 
             /**
-             * Copy icons to output folder.
+             * Generate .debug file.
              */
             function (callback)
             {
-                var message = 'Copying panel icons...';
-                grunt.verbose.writeln(message).or.write(message);
-
-                var dest = path.join(build.staging, 'CSXS', 'panel-icons'),
-                    panel = build.extension.icons.panel,
-                    icon, newIcon;
-
-                for (icon in panel.light)
+                if (build.profile === 'debug' || build.profile === 'launch')
                 {
-                    if (panel.light.hasOwnProperty(icon))
+                    var message = 'Generating ' + '.debug'.cyan + ' file...';
+                    grunt.verbose.writeln(message).or.write(message);
+
+                    var dotdebug_file = path.join(cep.utils.plugin_folder(), 'res/.debug');
+
+                    if (grunt.file.exists(dotdebug_file))
                     {
-                        newIcon = path.basename(panel.light[icon]);
-                        grunt.file.copy(panel.light[icon], path.join(dest, newIcon));
-                        panel.light[icon] = newIcon;
+                        if (typeof build.launch.hostPort !== 'number' || build.launch.hostPort < 0)
+                        {
+                            grunt.verbose.or.error();
+                            grunt.fatal('Invalid host debug port ' + build.launch.hostPort + '.');
+                        }
+
+                        var data = { 'build': build },
+                            processed = grunt.template.process(grunt.file.read(dotdebug_file), { data: data });
+
+                        grunt.file.write(path.join(build.staging, '.debug'), processed);
                     }
+
+                    grunt.verbose.or.ok();
                 }
 
-                for (icon in panel.dark)
-                {
-                    if (panel.dark.hasOwnProperty(icon))
-                    {
-                        newIcon = path.basename(panel.dark[icon]);
-                        grunt.file.copy(panel.dark[icon], path.join(dest, newIcon));
-                        panel.dark[icon] = newIcon;
-                    }
-                }
-
-                build.extension.icons.panel = panel;
-
-                grunt.verbose.or.ok();
                 callback();
             },
 
@@ -127,12 +102,9 @@ module.exports = function (grunt)
              */
             function (callback)
             {
-                var xml = require('../lib/xml.js')(grunt);
-                xml.manifest(callback, build);
+                require('./xml')(grunt).manifest(callback, build);
             }
         );
-
-        //grunt.log.writeln(JSON.stringify(build));
 
         // Run child tasks
         async.series(tasks, function (err, result) { callback(err, result); });
@@ -177,7 +149,7 @@ module.exports = function (grunt)
                 }
 
                 // Extension install path
-                launch_config.install_path = path.join(folder_servicemgr, build.extension.basename) + '.debug';
+                launch_config.install_path = path.join(folder_servicemgr, build.bundle.basename) + '.debug';
 
                 // Application folder
                 var folder_name = launch_config.host.hasOwnProperty('folder') ? launch_config.host.folder : '/Adobe ' + launch_config.host.name + ' ' + launch_config.family;

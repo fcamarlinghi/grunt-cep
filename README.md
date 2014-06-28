@@ -3,11 +3,22 @@
 
 By using this task you can debug and package HTML5-based extensions for Adobe&reg; Creative Cloud&reg; products directly from Grunt, in a totally automated manner and without the Adobe Extension Builder plugin.
 
-The tool can automatically generate self-signed certificates for extension packaging and automates some error-prone tasks such as extension manifest files creation. It supports hybrid extensions and lets you create different builds of the extension based on targeted Adobe products.
+The tool can automatically generate self-signed certificates for extension packaging and automates some error-prone tasks such as bundle and extension manifest files creation. It supports hybrid extensions and lets you create different builds of an extension bundle based on targeted Adobe products.
 
 It is based on the `csxs` command line tool by [Creative Market](https://github.com/creativemarket/csxs).
 
 **Please note:** the plugin is currently in alpha stage and may contain bugs. Options are not freezed and may change in future versions.
+
+## Changelog
+### Latest Version
+**0.2.0**: Added support for packaging multiple extensions in a single extension bundle. **Warning:** contains breaking changes to the task configuration options, see updated configuration section below.
+
+### Previous Releases
+**0.1.2**: Improved changelogs management, bug fixes.
+
+**0.1.1**: Bug fixes.
+
+**0.1.0**: First release.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.4`. Please refer to the [official documentation](http://gruntjs.com/getting-started) to get started with Grunt. You may install this plugin with this command:
@@ -28,9 +39,9 @@ You can use the [_grunt-init-cep_](https://github.com/fcamarlinghi/grunt-init-ce
 Please refer to the [_grunt-init-cep_](https://github.com/fcamarlinghi/grunt-init-cep) documentation for installation and usage instruction.
 
 ### Advanced Setup
-All the icons, manifest, MXI and `update.xml` files provided by the template can also be found in the `res/extension` folder located inside the plugin installation folder. If you prefer, you can manually copy these files instead of using the _grunt-init-cep_ template.
+Bundle icon, manifest, MXI and `update.xml` files provided by the template can also be found in the `res/bundle` folder located inside the plugin installation folder. If you prefer, you can manually copy these files instead of using the _grunt-init-cep_ template.
 
-_grunt-cep_ is setup to use these files by default, so just copy the `res/expresso` folder to the root of your project (that is, into the same folder of your `Gruntfile.js`) and you should be good to go.
+_grunt-cep_ is setup to use these files by default, so just copy the `res/bundle` folder to the root of your project (that is, the same folder of your `Gruntfile.js`) and you should be good to go.
 
 #### Custom Manifest, XML and MXI Files
 XML and MXI template files are populated at build time using configuration properties. For most extensions the provided templates should work just fine, but for complex extensions it might be necessary to make changes to these files or even provide custom ones.
@@ -45,7 +56,7 @@ grunt cep
 ```
 
 ### Options
-As the task configuration object has several root properties and child objects that you can customize to fit your needs, _grunt-cep_ options are better kept in an external Javascript or JSON file for easier editing and imported in your `Gruntfile.js` configuration at run-time using either:
+The task configuration object has several root properties and child objects that you can customize to fit your needs. As such, _grunt-cep_ options are better kept in an external Javascript or JSON file for easier editing and imported in your `Gruntfile.js` configuration at run-time using either:
 
 ```js
 require('cep-config.js');
@@ -86,8 +97,70 @@ These properties define base task options.
 	</tr>
 </table>
 
-#### cep.extension
-Object that holds extension related information such as extension name, author, version, etc. The properties defined here are used to fill in manifest and other extension related file templates.
+#### cep.bundle
+Contains information about the extension bundle, that is the [container](http://www.adobe.com/devnet/creativesuite/articles/multiple-extensions.html) for all the extensions specified below. If required data is not specified here, _grunt-cep_ will try to load it from the firstextension specified in the `cep.extensions` array.
+
+
+<table width="100%">
+	<tr>
+		<td valign="top" width="140px"><strong>version</strong></td>
+		<td valign="top" width="50px">String</td>
+		<td valign="top">Bundle version number (format: <code>X.X.X</code>).</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>id</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">Unique identifier for the bundle (used by Creative Cloud and Extension Manager). Usually provided in a form like <code>com.developer_name.bundle_name</code>.</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>name</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">Bundle name, displayed in Extension Manager.</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>author_name</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">Author or company name.</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>mxi_icon</strong></td>
+		<td valign="top">Object</td>
+		<td valign="top">Bundle icon, displayed in Extension Manager. Icon should be a 23x23px PNG.</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>update_url</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">URL that contains extension XML update file and packages. Extension Manager will check for extension updates at <code>{update_url}/update.xml</code> and automatically download the updated package from <code>{update_url}/{name}_{version}.zxp</code>.</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>description</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">Description of the extension to display in the Extension Manager (supports HTML markup). This is only displayed if an URL is not entered in the <code>description_href</code> property.</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>description_href</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">A URL that points to a HTML file containing the description displayed in the Extension Manager when the extension bundle is selected. If provided <code>description</code> is not used.</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>ui_access</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">Description of how to access the extension, displayed in Extension Manager (supports HTML markup).</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>license_agreement</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">License agreement shown when installing the extension (supports HTML).</td>
+	</tr>
+	<tr>
+		<td valign="top" width="140px"><strong>manifest</strong></td>
+		<td valign="top" width="50px">String</td>
+		<td valign="top">Bundle manifest file template, filled in at run-time with bundle information. You can one of the provided manifests (i.e. <code>bundle/manifest.bundle.cc.xml</code>) or provide your own. This is usually better specified in the <strong>builds</strong> array to allow per-product configuration (see below).</td>
+	</tr>
+</table>
+
+#### cep.extensions
+An array containing information about each single extension that will be added to the bundle. Each extension object holds information such as extension name, author, version, etc. The properties defined here are used to fill in manifest and other extension related file templates.
 
 <table width="100%">
 	<tr>
@@ -98,17 +171,12 @@ Object that holds extension related information such as extension name, author, 
 	<tr>
 		<td valign="top"><strong>id</strong></td>
 		<td valign="top">String</td>
-		<td valign="top">Unique identifier for the extension (used by Creative Cloud and Extension Manager).</td>
+		<td valign="top">Unique identifier for the extension (used by Creative Cloud and Extension Manager). Usually provided in a form like <code>com.developer_name.bundle_name.extension_name</code>.</td>
 	</tr>
 	<tr>
 		<td valign="top"><strong>name</strong></td>
 		<td valign="top">String</td>
-		<td valign="top">Extension name displayed in the panel's header and when installing the extension.</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>author_name</strong></td>
-		<td valign="top">String</td>
-		<td valign="top">Author or company name.</td>
+		<td valign="top">Extension name displayed in the panel's header.</td>
 	</tr>
 	<tr>
 		<td valign="top"><strong>mainPath</strong></td>
@@ -121,31 +189,6 @@ Object that holds extension related information such as extension name, author, 
 		<td valign="top">Main ExtendScript file for the extension.</td>
 	</tr>
 	<tr>
-		<td valign="top"><strong>description</strong></td>
-		<td valign="top">String</td>
-		<td valign="top">Description of the extension to display in the Extension Manager (supports HTML markup). This is only displayed if an URL is not entered in the <code>description_href</code> property.</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>description_href</strong></td>
-		<td valign="top">String</td>
-		<td valign="top">A URL that points to a HTML file containing the description displayed in the Extension Manager when the extension is selected. If provided <code>description</code> is not used.</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>license_agreement</strong></td>
-		<td valign="top">String</td>
-		<td valign="top">License agreement shown when installing the extension (supports HTML).</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>update_url</strong></td>
-		<td valign="top">String</td>
-		<td valign="top">URL that contains extension XML update file and packages. Extension Manager will check for extension updates at <code>{update_url}/update.xml</code> and automatically download the updated package from <code>{update_url}/{name}_{version}.zxp</code>.</td>
-	</tr>
-	<tr>
-		<td valign="top"><strong>ui_access</strong></td>
-		<td valign="top">String</td>
-		<td valign="top">Description of how to access the extension, displayed in Extension Manager (supports HTML markup).</td>
-	</tr>
-	<tr>
 		<td valign="top"><strong>icons</strong></td>
 		<td valign="top">Object</td>
 		<td valign="top">Extension icons, each icon should be a 23x23px PNG. Check the default values in the <code>/options/defaults.js</code> source file for a full description of the object.</td>
@@ -155,21 +198,21 @@ Object that holds extension related information such as extension name, author, 
 		<td valign="top">Object</td>
 		<td valign="top">Panel dimensions (in pixels). Check the default values in the <code>/options/defaults.js</code> source file for a full description of the object.</td>
 	</tr>
+	<tr>
+		<td valign="top" width="140px"><strong>manifest</strong></td>
+		<td valign="top" width="50px">String</td>
+		<td valign="top">Extension manifest file template, filled in at run-time with extension information.  You can one of the provided manifests (i.e. <code>bundle/manifest.extension.cc.xml</code>) or provide your own. This is usually better specified in the <strong>builds</strong> array to allow per-product configuration (see below).</td>
+	</tr>
 </table>
 
 #### cep.builds
-The ability to specify single builds is one of the most powerful feature of the _grunt-cep_ when dealing with complex extensions.
+The ability to specify single builds is one of the most powerful feature of _grunt-cep_ when dealing with complex extension bundles.
 
-The `cep.builds` property is an array of objects describing the various builds that should be executed, each one resulting in a seperate _ZXP_ file that will be bundled with the final _ZXP_ installer.
+The `cep.builds` property is an array of objects describing the various builds that should be executed, each one resulting in a separate _ZXP_ file that will be bundled with the final _ZXP_ installer.
 
 Each build object contains the following properties and extends the main task configuration, giving you the ability to override base configuration values on a per-build basis.
 
 <table width="100%">
-	<tr>
-		<td valign="top" width="140px"><strong>manifest</strong></td>
-		<td valign="top" width="50px">String</td>
-		<td valign="top">Extension manifest file template, filled in at run-time with extension information. You can use the provided manifest (<code>manifest.cc.xml</code>) or provide your own.</td>
-	</tr>
 	<tr>
 		<td valign="top"><strong>products</strong></td>
 		<td valign="top">Array</td>
@@ -196,16 +239,21 @@ Only used when the <code>launch</code> profile is active, holds information need
 		<td valign="top">String</td>
 		<td valign="top">Currently unused (see <code>build.families</code>).</td>
 	</tr>
+	<tr>
+		<td valign="top"><strong>hostPort</strong></td>
+		<td valign="top">Number</td>
+		<td valign="top">Default host port used for debug. If bundling multiple extensions, this will be used for the first one, with other extensions using incremental ports (i.e. 8089, 8090, etc.).</td>
+	</tr>
 </table>
 
 #### cep.package
-Only used with the <code>package</code> profile, holds information related to extension packaging and distribution.
+Only used with the <code>package</code> profile, holds information related to bundle packaging and distribution.
 
 <table width="100%">
 	<tr>
 		<td valign="top" width="140px"><strong>mxi</strong></td>
 		<td valign="top" width="50px">String</td>
-		<td valign="top">Path to the MXI file template for this extension. You can use the provided manifest template or provide your own.</td>
+		<td valign="top">Path to the MXI file template for this bundle. You can use the provided manifest template (<code>bundle/template.mxi</code>) or provide your own.</td>
 	</tr>
 	<tr>
 		<td valign="top"><strong>certificate</strong></td>
@@ -220,11 +268,11 @@ Only used with the <code>package</code> profile, holds information related to ex
 	<tr>
 		<td valign="top"><strong>update</strong></td>
 		<td valign="top">Object</td>
-		<td valign="top"><p>When packaging an extension, the task tries to find a changelog file named as the current extension version (<code>x.x.x.txt</code>) in the <code>changelog_folder</code> folder. This file is used to fill in the <code>update.xml</code> template file which can be used to support automatic updates for your extension through the Adobe Extension Manager CC application.</p>
+		<td valign="top"><p>When packaging an extension bundle, the task tries to find a changelog file named as the current extension version (<code>x.x.x.txt</code>) in the <code>changelog_folder</code> folder. This file is used to fill in the <code>update.xml</code> template file which can be used to support automatic updates for your extension through the Adobe Extension Manager CC application.</p>
 		<ul>
 		    <li><strong>file</strong> (String): path to the <code>update.xml</code> file template (see below).</li>
-		    <li><strong>changelog_folder</strong> (String): path to the folder containing changelog files (was <code>changelogs</code> before version 0.1.2).</li>
-		    <li><strong>changelog_extension</strong> (String): changelog files extension (added in 0.1.2).</li>
+		    <li><strong>changelog_folder</strong> (String): path to the folder containing changelog files.</li>
+		    <li><strong>changelog_extension</strong> (String): changelog files extension.</li>
 		</ul>
 		</td>
 	</tr>
@@ -233,29 +281,36 @@ Only used with the <code>package</code> profile, holds information related to ex
 ## Usage Examples
 The example configuration below is based on the [_grunt-init-cep_](https://github.com/fcamarlinghi/grunt-init-cep) project template and defines an extension for Adobe Photoshop CC. It registers two tasks (`debug` and `release`) which respectively launch debug inside Adobe Photoshop CC and package the full extension.
 
-All the icons and file templates referenced in the configuration are available in the project template and inside the plugin `res/extension` folder (see the Getting Started section).
+All the icons and file templates referenced in the configuration are available in the project template (see the Getting Started section).
 
 ```javascript
 // cep-config.js
 module.exports =
 {
-    extension: {
+    bundle: {
         version: '0.1.0',
-        id: 'com.example',
-        name: 'Example',
+        id: 'com.foo.exampleBundle',
+        name: 'Example Bundle',
+        author_name: 'Foo',
+        mxi_icon: 'bundle/icon-mxi.png',
+    },
+    
+    extensions: [{
+        version: '0.1.0',
+        id: 'com.foo.exampleBundle.examplePanel',
+        name: 'Example Panel',
         author_name: 'Foo',
         icons: {
-            mxi: 'extension/icon-mxi.png',
             panel: {
                 light: {
-                    normal: 'extension/panel-icons/icon-light.png',
-                    hover: 'extension/panel-icons/icon-light-hover.png',
-                    disabled: 'extension/panel-icons/icon-light-disabled.png'
+                    normal: 'icons/icon-light.png',
+                    hover: 'icons/icon-light-hover.png',
+                    disabled: 'icons/icon-light-disabled.png'
                 },
                 dark: {
-                    normal: 'extension/panel-icons/icon-dark.png',
-                    hover: 'extension/panel-icons/icon-dark-hover.png',
-                    disabled: 'extension/panel-icons/icon-dark-disabled.png'
+                    normal: 'icons/icon-dark.png',
+                    hover: 'icons/icon-dark-hover.png',
+                    disabled: 'icons/icon-dark-disabled.png'
                 },
             }
         },
@@ -266,21 +321,20 @@ module.exports =
         },
         mainPath: 'example.html',
         scriptPath: 'extendscript/example.jsx',
-    },
+    }],
 
     builds: [
         // Adobe Photoshop CC
         {
-            manifest: 'extension/manifest.cc.xml',
+            bundle: { manifest: 'bundle/manifest.bundle.cc.xml' },
+            extensions: [{ manifest: 'bundle/manifest.extension.cc.xml' }],
             products: ['photoshop'],
             source: 'src',
         },
     ],
 
     'package': {
-        mxi: 'extension/example.mxi',
         certificate: {
-            file: 'extension/certificate.p12',
             password: 'example_password',
         }
     },

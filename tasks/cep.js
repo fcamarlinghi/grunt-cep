@@ -43,14 +43,28 @@ module.exports = function (grunt)
 
 
         // SETUP
-        // Generate needed configuration settings
-        if (!options.extension.basename)
-            options.extension.basename = options.extension.id.replace(/[\s]+/g, '.').toLowerCase();
+        // Make sure bundle information is correct, or fill it in
+        // using data from the first extension
+        options.bundle = _.extend(
+            options.bundle,
+            _.pick(options.extensions[0], 'version', 'id', 'name', 'author_name'),
+            function (a, b) { return typeof a !== 'string' || !a.length ? b : a; }
+        );
+
+        if (!options.bundle.basename)
+            options.bundle.basename = options.bundle.id.replace(/[\s]+/g, '.').toLowerCase();
 
         // Make sure update_url correctly ends with a dash
-        var update_url = options.extension.update_url;
+        var update_url = options.bundle.update_url;
         if (update_url.length && update_url.indexOf('/', update_url.length - 1) === -1)
-            options.extension.update_url = update_url + '/';
+            options.bundle.update_url = update_url + '/';
+
+        // Add extension settings
+        options.extensions.forEach(function (extension)
+        {
+            if (!extension.basename)
+                extension.basename = extension.id.replace(/[\s]+/g, '.').toLowerCase();
+        })
 
         // Set some useful global variables
         global.IS_WINDOWS = !!process.platform.match(/^win/);
@@ -59,7 +73,7 @@ module.exports = function (grunt)
 
 
         // EXECUTION
-        // Check whether we should launch debug or package the full extension
+        // Check whether we should launch debug or package the full bundle
         if (options.profile === 'debug' || options.profile === 'launch')
         {
             grunt.log.writeln(options.profile.yellow + ' profile is enabled.');
@@ -121,11 +135,14 @@ module.exports = function (grunt)
                     }
                     else
                     {
-                        build = _.merge({}, options, build);
+                        // Override bundle and extension data with build-specific information
+                        build = _.merge(options, build);
+                        //grunt.log.writeln(JSON.stringify(build));
                         build.launch.product = product;
                         build.launch.family = family;
                         callback();
                     }
+
                 },
 
                 /**
@@ -154,13 +171,22 @@ module.exports = function (grunt)
                 },
 
                 /**
-                 * Compile extension.
+                 * Prepare and compile bundle.
                  */
                 function (callback)
                 {
-                    build.extension.id = build.extension.id + '.debug';
-                    build.extension.name = build.extension.name + ' (debug)';
+                    // Set staging folder to 'debug'
                     build.staging = path.join(build.staging, 'debug');
+
+                    // Append debug flag to bundle and extensions
+                    build.bundle.id = build.bundle.id + '.debug';
+                    build.bundle.name = build.bundle.name + ' (debug)';
+
+                    build.extensions.forEach(function (extension)
+                    {
+                        extension.id = extension.id + '.debug';
+                        extension.name = extension.name + ' (debug)';
+                    });
 
                     // Execute only the build that is needed for debugging
                     compiler.compile(callback, build);
@@ -186,7 +212,7 @@ module.exports = function (grunt)
                  */
                 function (callback)
                 {
-                    // Create temporary 'package' folder
+                    // Create temporary 'package' folder and set it as the staging folder
                     options.staging = path.join(options.staging, 'package');
 
                     if (grunt.file.exists(options.staging))
@@ -195,8 +221,8 @@ module.exports = function (grunt)
                     grunt.file.mkdir(options.staging);
 
                     // Copy MXI icon over and update icon path
-                    grunt.file.copy(options.extension.icons.mxi, path.join(options.staging, path.basename(options.extension.icons.mxi)));
-                    options.extension.icons.mxi = path.basename(options.extension.icons.mxi);
+                    grunt.file.copy(options.bundle.mxi_icon, path.join(options.staging, path.basename(options.bundle.mxi_icon)));
+                    options.bundle.mxi_icon = path.basename(options.bundle.mxi_icon);
 
                     // Check whether an 'update.xml' file should be generated
                     options['package'].update.enabled = grunt.file.exists(options['package'].update.file);
@@ -211,7 +237,7 @@ module.exports = function (grunt)
                 {
                     // Validate config
                     if (!grunt.file.exists(options['package'].certificate.file))
-                        require('./certificate.js')(grunt).generate(callback, options);
+                        require('./zxp.js')(grunt).certificate(callback, options);
                     else
                         callback();
                 },
@@ -243,7 +269,7 @@ module.exports = function (grunt)
                         // Compiler
                         tasks.push(function (callback)
                         {
-                            compiler.compile(callback, _.merge({}, options, build));
+                            compiler.compile(callback, _.merge(_.extend({}, options), build));
                         });
 
                         // ZXP
@@ -287,7 +313,7 @@ module.exports = function (grunt)
                  */
                 function (callback)
                 {
-                    var final_zxp = path.join(options.staging, '../', options.extension.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + options.extension.version + '.zxp');
+                    var final_zxp = path.join(options.staging, '../', options.bundle.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + options.bundle.version + '.zxp');
 
                     // It seems that the packaging utility does not overwrite files automatically
                     // So we delete the older ZXP if it exists in the folder

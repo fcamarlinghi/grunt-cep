@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<macromedia-extension id="<%= bundle.id %>" name="<%= bundle.name %>" requires-restart="true" version="<%= bundle.version %>" icon="<%= bundle.mxi_icon %>">
+	<% if (bundle.update_url.length) { %><update method="directlink" url="<%= bundle.update_url %>" /><% } %>
+	<author name="<%= bundle.author_name %>" />
+	<description<% if (bundle.description_href.length) { %> href="<%= bundle.description_href %>"<% } %>><![CDATA[<%= bundle.description %>]]></description>
+	<license-agreement><![CDATA[<%= bundle.license_agreement %>]]></license-agreement>
+	<ui-access><![CDATA[<%= bundle.ui_access %>]]></ui-access>
+	<products>
+		<%= products %>
+	</products>
+	<files>
+		<%= files %>
+		<file source="<%= bundle.mxi_icon %>" destination="$ExtensionSpecificEMStore" />
+	</files>
+</macromedia-extension>

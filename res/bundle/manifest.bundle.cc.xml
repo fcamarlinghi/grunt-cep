@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtensionManifest Version="4.0" ExtensionBundleId="<%= bundle.id %>" ExtensionBundleName="<%= bundle.name %>" ExtensionBundleVersion="<%= bundle.version %>" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Author><![CDATA[<%= bundle.author_name %>]]></Author>
+	<ExtensionList>
+    <%= extension_list %>
+	</ExtensionList>
+	<ExecutionEnvironment>
+		<HostList>
+			<%= hosts %>
+		</HostList>
+		<LocaleList>
+			<Locale Code="All" />
+		</LocaleList>
+		<RequiredRuntimeList>
+			<RequiredRuntime Name="CSXS" Version="4.0" />
+		</RequiredRuntimeList>
+	</ExecutionEnvironment>
+	<DispatchInfoList>
+    <%= extensions %>
+  </DispatchInfoList>
+</ExtensionManifest>

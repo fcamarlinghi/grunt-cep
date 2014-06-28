@@ -53,8 +53,8 @@ module.exports = function (grunt)
             args: [
                     '-selfSignedCert',
                     'US', 'NY',
-                    options.extension.author_name,
-                    options.extension.author_name,
+                    options.build.author_name,
+                    options.build.author_name,
                     options['package'].certificate.password,
                     options['package'].certificate.file
             ],

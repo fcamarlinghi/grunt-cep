@@ -1,0 +1,37 @@
+﻿<Extension Id="<%= extension.id %>">
+	<DispatchInfo>
+		<Resources>
+			<MainPath>./<%= extension.mainPath %></MainPath>
+			<ScriptPath>./<%= extension.scriptPath %></ScriptPath>
+		</Resources>
+		<Lifecycle>
+			<AutoVisible>true</AutoVisible>
+		</Lifecycle>
+		<UI>
+			<Type>Panel</Type>
+			<Menu><%= extension.name %></Menu>
+			<Geometry>
+				<Size>
+					<Height><%= extension.size.normal.height %></Height>
+					<Width><%= extension.size.normal.width %></Width>
+				</Size>
+				<MaxSize>
+					<Height><%= extension.size.max.height %></Height>
+					<Width><%= extension.size.max.width %></Width>
+				</MaxSize>
+				<MinSize>
+					<Height><%= extension.size.min.height %></Height>
+					<Width><%= extension.size.min.width %></Width>
+				</MinSize>
+			</Geometry>
+      <Icons>
+        <Icon Type="Normal">./CSXS/<%= extension.basename %>/<%= extension.icons.light.normal %></Icon>
+        <Icon Type="RollOver">./CSXS/<%= extension.basename %>/<%= extension.icons.light.hover %></Icon>
+        <Icon Type="Disabled">./CSXS/<%= extension.basename %>/<%= extension.icons.light.disabled %></Icon>
+        <Icon Type="DarkNormal">./CSXS/<%= extension.basename %>/<%= extension.icons.dark.normal %></Icon>
+        <Icon Type="DarkRollOver">./CSXS/<%= extension.basename %>/<%= extension.icons.dark.hover %></Icon>
+        <Icon Type="DarkDisabled">./CSXS/<%= extension.basename %>/<%= extension.icons.dark.disabled %></Icon>
+      </Icons>
+		</UI>
+	</DispatchInfo>
+</Extension>

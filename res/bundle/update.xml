@@ -1,0 +1,5 @@
+<ExtensionUpdateInformation>
+	<version><%= bundle.version %></version>
+	<download><%= download_url %></download>
+	<description><![CDATA[<%= bundle.description %>]]></description>
+</ExtensionUpdateInformation>
