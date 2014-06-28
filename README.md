@@ -212,7 +212,7 @@ An array containing information about each single extension that will be added t
 	<tr>
 		<td valign="top" width="140px"><strong>manifest</strong></td>
 		<td valign="top" width="50px">String</td>
-		<td valign="top">Extension manifest file template, filled in at run-time with extension information.  You can one of the provided manifests (i.e. <code>bundle/manifest.extension.cc.xml</code>) or provide your own. This is usually better specified in the <strong>builds</strong> array to allow per-product configuration (see example below).</td>
+		<td valign="top">Extension manifest file template, filled in at run-time with extension information.  You can one of the provided manifests (i.e. <code>bundle/manifest.extension.xml</code>) or provide your own. This is usually better specified in the <strong>builds</strong> array to allow per-product configuration (see example below).</td>
 	</tr>
 </table>
 
@@ -338,7 +338,7 @@ module.exports =
         // Adobe Photoshop CC
         {
             bundle: { manifest: 'bundle/manifest.bundle.cc.xml' },
-            extensions: [{ manifest: 'bundle/manifest.extension.cc.xml' }],
+            extensions: [{ manifest: 'bundle/manifest.extension.xml' }],
             products: ['photoshop'],
             source: 'src',
         },

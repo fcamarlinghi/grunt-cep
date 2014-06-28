@@ -148,7 +148,7 @@ module.exports =
             bundle: { manifest: 'bundle/manifest.bundle.cc.xml' },
 
             // Add a default extension manifest file to each extension
-            extensions: [{ manifest: 'bundle/manifest.extension.cc.xml' }],
+            extensions: [{ manifest: 'bundle/manifest.extension.xml' }],
 
             // Supported products
             products: [],
