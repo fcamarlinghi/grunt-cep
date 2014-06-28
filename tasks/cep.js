@@ -261,9 +261,6 @@ module.exports = function (grunt)
                         build.output_file = name + '.zxp';
                         build.staging = path.join(options.staging, '../', 'release');
 
-                        // REVIEW: CEP01
-                        build.families = ['CC'];
-
                         // Compiler
                         tasks.push(function (callback)
                         {

@@ -143,29 +143,11 @@ module.exports = function (grunt)
         // Create <files> list
         for (var i = 0, n = builds.length; i < n; i++)
         {
-            var cc_index = builds[i].families.indexOf('CC');
-
-            if (cc_index > -1)
-            {
-                // CC products are parsed separately
-                builds[i].families.splice(cc_index, 1);
-
-                // Parse CC products
-                builds[i].products.forEach(function (product)
-                {
-                    var version_range = get_version_range(product, ['CC']);
-                    data.files.push('<file destination="" file-type="CSXS" products="' + cep.hosts.get_cc_family_name(cep.hosts.getProduct(product).familyname) + '" maxVersion="' + version_range.max + '" minVersion="' + version_range.min + '" source="' + path.basename(builds[i].output_file) + '" />');
-                });
-            }
-
-            if (builds[i].families.length === 0)
-                continue;
-
-            // Parse CS products
+            // Parse CC products
             builds[i].products.forEach(function (product)
             {
                 var version_range = get_version_range(product, builds[i].families);
-                data.files.push('<file destination="" file-type="CSXS" products="' + cep.hosts.getProduct(product).familyname + '" maxVersion="' + version_range.max + '" minVersion="' + version_range.min + '" source="' + path.basename(builds[i].output_file) + '" />');
+                data.files.push('<file destination="" file-type="CSXS" products="' + cep.hosts.get_cc_family_name(cep.hosts.getProduct(product).familyname) + '" maxVersion="' + version_range.max + '" minVersion="' + version_range.min + '" source="' + path.basename(builds[i].output_file) + '" />');
             });
         }
 
