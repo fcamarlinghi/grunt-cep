@@ -47,14 +47,20 @@ module.exports = function (grunt)
      */
     var certificate = function (callback, options)
     {
+        if (!options.bundle.author_name || !options.bundle.author_name.length)
+        {
+            grunt.fatal('Can not generate a self-signed certificate without specifying an "author_name" in the bundle properties.');
+            callback(error, result);
+        }
+
         // Options
         var options = {
             cmd: get_zxp_path(),
             args: [
                     '-selfSignedCert',
                     'US', 'NY',
-                    options.build.author_name,
-                    options.build.author_name,
+                    options.bundle.author_name,
+                    options.bundle.author_name,
                     options['package'].certificate.password,
                     options['package'].certificate.file
             ],

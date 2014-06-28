@@ -235,7 +235,7 @@ module.exports = function (grunt)
                 {
                     // Validate config
                     if (!grunt.file.exists(options['package'].certificate.file))
-                        require('./zxp.js')(grunt).certificate(callback, options);
+                        zxp.certificate(callback, options);
                     else
                         callback();
                 },
