@@ -139,6 +139,8 @@ module.exports = function (grunt)
 
                     if (launch_config.family === 'CC')
                         folder_servicemgr = path.join(process.env['APPDATA'], '/Adobe/CEPServiceManager4/extensions');
+                    else
+                        folder_servicemgr = path.join(process.env['APPDATA'], '/Adobe/CEP/extensions');
                 }
                 else
                 {
@@ -146,16 +148,23 @@ module.exports = function (grunt)
 
                     if (launch_config.family === 'CC')
                         folder_servicemgr = path.join(process.env['APPDATA'], '/Library/Application Support/Adobe/CEPServiceManager4/extensions');
+                    else
+                        folder_servicemgr = path.join(process.env['APPDATA'], '/Library/Application Support/Adobe/CEP/extensions');
                 }
 
                 // Extension install path
                 launch_config.install_path = path.join(folder_servicemgr, build.bundle.basename) + '.debug';
 
                 // Application folder
-                var folder_name = launch_config.host.hasOwnProperty('folder') ? launch_config.host.folder : '/Adobe ' + launch_config.host.name + ' ' + launch_config.family;
+                var folder_family = {
+                    'CC': 'CC',
+                    'CC2014': 'CC 2014',
+                };
+
+                var folder_name = launch_config.host.hasOwnProperty('folder') ? launch_config.host.folder : '/Adobe ' + launch_config.host.name + ' ' + folder_family[launch_config.family];
                 launch_config.app_folder = path.join(folder_apps, folder_name);
 
-                if (launch_config.host.x64 && global.IS_X64)
+                if (launch_config.family === 'CC' && launch_config.host.x64 && global.IS_X64)
                     launch_config.app_folder += ' (64 Bit)';
 
                 if (!grunt.file.exists(launch_config.app_folder))
@@ -191,7 +200,7 @@ module.exports = function (grunt)
                 else
                 {
                     options.cmd = 'kill';
-                    options.args = ['-9', '`ps -ef | grep "Adobe ' + launch_config.host.bin.mac + '" | grep -v grep | awk \'{print $2}\'`'];
+                    options.args = ['-9', '`ps -ef | grep "' + launch_config.host.bin.mac + '" | grep -v grep | awk \'{print $2}\'`'];
                 }
 
                 grunt.verbose.writeln((options.cmd + ' ' + options.args.join(' ')).magenta)
@@ -224,6 +233,7 @@ module.exports = function (grunt)
                 {
                     PLISTS = {
                         'CC': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.4.plist'),
+                        'CC2014': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.5.plist'),
                     };
 
                     if (!PLISTS.hasOwnProperty(host_family))
@@ -238,6 +248,7 @@ module.exports = function (grunt)
                 {
                     PLISTS = {
                         'CC': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.4\\',
+                        'CC2014': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.5\\',
                     };
 
                     if (!PLISTS.hasOwnProperty(host_family))

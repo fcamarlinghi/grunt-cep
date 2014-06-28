@@ -89,7 +89,7 @@ module.exports = function (grunt)
                     grunt.log.write('Validating options...');
                     var builds = options.builds,
                         product = options.launch.product,
-                        family = 'CC'; // REVIEW: CEP01 options.family
+                        family = options.launch.family;
 
                     if (!_.isArray(builds) || !builds.length)
                     {
@@ -102,31 +102,29 @@ module.exports = function (grunt)
                     if (family)
                         family = family.toUpperCase();
 
-                    if (!product/* && !family*/)
+                    if (!product && !family)
                     {
                         build = builds[0];
                         product = build.products[0];
-                        // REVIEW: CEP01 //family = _.last(build.families);
+                        family = build.families[0];
                     }
                     else
                     {
                         for (var i = 0, n = builds.length; i < n; i++)
                         {
                             product_index = !product || builds[i].products.indexOf(product);
-                            // REVIEW: CEP01 //family_index = !family || builds[i].families.indexOf(family);
+                            family_index = !family || builds[i].families.indexOf(family);
 
-                            if (product_index !== -1/* && family_index !== -1*/)
+                            if (product_index !== -1 && family_index !== -1)
                             {
                                 build = builds[i];
                                 product = build.products[!product ? 0 : product_index];
-                                // REVIEW: CEP01 //family = build.families[!family ? 0 : family_index];
+                                family = build.families[!family ? 0 : family_index];
                                 break;
                             }
                         }
                     }
-
-                    build.families = ['CC'];
-
+                    
                     if (!build || !product || !family)
                     {
                         grunt.log.error();

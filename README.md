@@ -11,14 +11,25 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
-**0.2.0**: Added support for packaging multiple extensions in a single extension bundle. **Warning:** contains breaking changes to the task configuration options, see updated configuration section below.
+**0.2.0**:
+
+* Added support for packaging multiple extensions in a single extension bundle.
+* Added support for Adobe Creative Cloud 2014 release.
+
+**Warning:** contains breaking changes to the task configuration options, see the updated configuration section below if upgrading from a previous version.
 
 ### Previous Releases
-**0.1.2**: Improved changelogs management, bug fixes.
+**0.1.2**
 
-**0.1.1**: Bug fixes.
+* Improved changelogs management, bug fixes.
 
-**0.1.0**: First release.
+**0.1.1**
+
+* Bug fixes.
+
+**0.1.0**
+
+* First release.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.4`. Please refer to the [official documentation](http://gruntjs.com/getting-started) to get started with Grunt. You may install this plugin with this command:
@@ -56,7 +67,7 @@ grunt cep
 ```
 
 ### Options
-The task configuration object has several root properties and child objects that you can customize to fit your needs. As such, _grunt-cep_ options are better kept in an external Javascript or JSON file for easier editing and imported in your `Gruntfile.js` configuration at run-time using either:
+_grunt-cep_ has several options that you can customize to fit your needs. To avoid cluttering your `Gruntfile.js` it is more advisable to keep the options in an external Javascript or JSON file for easier editing and import them at run-time using either:
 
 ```js
 require('cep-config.js');
@@ -68,9 +79,9 @@ or:
 grunt.file.readJSON('cep-config.json');
 ```
 
-Base options defined in the external file can be overwritten in child tasks as needed (see the example below). Default values and a more in-depth description for all the properties below can be found in the <code>/options/defaults.js</code> file in the plugin folder.
+Options defined in the external file can be overwritten in child tasks as needed (see the example below). Default values and a more in-depth description for all the properties below can be found in the <code>/options/defaults.js</code> file in the plugin installation folder.
 
-#### cep
+#### options
 These properties define base task options.
 
 <table width="100%">
@@ -97,7 +108,7 @@ These properties define base task options.
 	</tr>
 </table>
 
-#### cep.bundle
+#### options.bundle
 Contains information about the extension bundle, that is the [container](http://www.adobe.com/devnet/creativesuite/articles/multiple-extensions.html) for all the extensions specified below. If required data is not specified here, _grunt-cep_ will try to load it from the firstextension specified in the `cep.extensions` array.
 
 
@@ -155,11 +166,11 @@ Contains information about the extension bundle, that is the [container](http://
 	<tr>
 		<td valign="top" width="140px"><strong>manifest</strong></td>
 		<td valign="top" width="50px">String</td>
-		<td valign="top">Bundle manifest file template, filled in at run-time with bundle information. You can one of the provided manifests (i.e. <code>bundle/manifest.bundle.cc.xml</code>) or provide your own. This is usually better specified in the <strong>builds</strong> array to allow per-product configuration (see below).</td>
+		<td valign="top">Bundle manifest file template, filled in at run-time with bundle information. You can one of the provided manifests (i.e. <code>bundle/manifest.bundle.cc.xml</code>) or provide your own. This is usually better specified in the <strong>builds</strong> array to allow per-product configuration (see example below).</td>
 	</tr>
 </table>
 
-#### cep.extensions
+#### options.extensions
 An array containing information about each single extension that will be added to the bundle. Each extension object holds information such as extension name, author, version, etc. The properties defined here are used to fill in manifest and other extension related file templates.
 
 <table width="100%">
@@ -201,11 +212,11 @@ An array containing information about each single extension that will be added t
 	<tr>
 		<td valign="top" width="140px"><strong>manifest</strong></td>
 		<td valign="top" width="50px">String</td>
-		<td valign="top">Extension manifest file template, filled in at run-time with extension information.  You can one of the provided manifests (i.e. <code>bundle/manifest.extension.cc.xml</code>) or provide your own. This is usually better specified in the <strong>builds</strong> array to allow per-product configuration (see below).</td>
+		<td valign="top">Extension manifest file template, filled in at run-time with extension information.  You can one of the provided manifests (i.e. <code>bundle/manifest.extension.cc.xml</code>) or provide your own. This is usually better specified in the <strong>builds</strong> array to allow per-product configuration (see example below).</td>
 	</tr>
 </table>
 
-#### cep.builds
+#### options.builds
 The ability to specify single builds is one of the most powerful feature of _grunt-cep_ when dealing with complex extension bundles.
 
 The `cep.builds` property is an array of objects describing the various builds that should be executed, each one resulting in a separate _ZXP_ file that will be bundled with the final _ZXP_ installer.
@@ -221,11 +232,11 @@ Each build object contains the following properties and extends the main task co
 	<tr>
 		<td valign="top"><strong>families</strong></td>
 		<td valign="top">Array</td>
-		<td valign="top">Currently unused. An array of strings containing the name of the product families targeted by this build. This can be useful in the future if Adobe releases a new family of products with a name different from Creative Cloud or with a different product set. Valid family names include: <code>CC</code>.</td>
+		<td valign="top">An array of strings containing the name of the product families targeted by this build. This can be useful to make sure an extension works across different Adobe Creative Cloud releases. Valid family names include: <code>CC</code>, <code>CC2014</code>.</td>
 	</tr>
 </table>
 
-#### cep.launch
+#### options.launch
 Only used when the <code>launch</code> profile is active, holds information needed to launch a target host application.
 
 <table width="100%">
@@ -237,16 +248,16 @@ Only used when the <code>launch</code> profile is active, holds information need
 	<tr>
 		<td valign="top"><strong>family</strong></td>
 		<td valign="top">String</td>
-		<td valign="top">Currently unused (see <code>build.families</code>).</td>
+		<td valign="top">Version of the host application to use for debugging, useful to test the extension in different releases of the same Adobe Creative Cloud application (i.e. while upgrading an extension from Adobe Photoshop CC to Adobe Photoshop CC 2014). If not specified, falls back to the first family specified in the current <strong>build</strong>. Valid family names include: <code>CC</code>, <code>CC2014</code>.</td>
 	</tr>
 	<tr>
-		<td valign="top"><strong>hostPort</strong></td>
+		<td valign="top"><strong>host_port</strong></td>
 		<td valign="top">Number</td>
 		<td valign="top">Default host port used for debug. If bundling multiple extensions, this will be used for the first one, with other extensions using incremental ports (i.e. 8089, 8090, etc.).</td>
 	</tr>
 </table>
 
-#### cep.package
+#### options.package
 Only used with the <code>package</code> profile, holds information related to bundle packaging and distribution.
 
 <table width="100%">

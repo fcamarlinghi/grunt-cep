@@ -153,8 +153,8 @@ module.exports =
             // Supported products
             products: [],
 
-            // Currently unused. Supported product families
-            families: ['CC'],
+            // Supported product families
+            families: ['CC2014', 'CC'],
         },
     ],
 
@@ -169,8 +169,9 @@ module.exports =
         // specified in the first build of the 'builds' array
         product: '',
 
-        // Currently unused
-        family: 'CC',
+        // Version of the host application to launch, defaults to the first one
+        // specified in the first build of the 'builds' array
+        family: '',
 
         // Default host port used for debug. If bundling multiple
         // extensions, this will be used for the first one, with

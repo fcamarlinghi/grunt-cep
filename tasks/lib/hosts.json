@@ -1,9 +1,59 @@
 {
+    "CC2014": {
+        "photoshop": {
+            "familyname": "Photoshop",
+            "name": "Photoshop",
+            "ids": [ "PHXS", "PHSP" ],
+            "version": { "min": "15.0", "max": "15.9" },
+            "bin": { "win": "Photoshop.exe", "mac": "Adobe Photoshop CC 2014.app" },
+            "x64": true
+        },
+        "illustrator": {
+            "familyname": "Illustrator",
+            "name": "Illustrator",
+            "ids": [ "ILST" ],
+            "version": { "min": "18.0", "max": "18.9" },
+            "bin": { "win": "Support Files/Contents/Windows/Illustrator.exe", "mac": "Adobe Illustrator CC 2014.app" },
+            "x64": true
+        },
+        "indesign": {
+            "familyname": "InDesign",
+            "name": "InDesign",
+            "ids": [ "IDSN" ],
+            "version": { "min": "10.0", "max": "10.9" },
+            "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign CC 2014.app" },
+            "x64": false
+        },
+        "flash": {
+            "familyname": "Flash",
+            "name": "Flash",
+            "ids": [ "FLPR" ],
+            "version": { "min": "14.0", "max": "14.9" },
+            "bin": { "win": "Flash.exe", "mac": "Adobe Flash CC 2014.app" },
+            "x64": true
+        },
+        "premiere": {
+            "familyname": "Premiere",
+            "name": "Premiere Pro",
+            "ids": [ "PPRO" ],
+            "version": { "min": "8.0", "max": "8.9" },
+            "bin": { "win": "Premiere.exe", "mac": "Adobe Premiere CC 2014.app" },
+            "x64": true
+        },
+        "prelude": {
+            "familyname": "Prelude",
+            "name": "Prelude",
+            "ids": [ "PRLD" ],
+            "version": { "min": "3.0", "max": "3.9" },
+            "bin": { "win": "Prelude.exe", "mac": "Adobe Prelude CC 2014.app" },
+            "x64": false
+        }
+    },
     "CC": {
         "photoshop": {
             "familyname": "Photoshop",
             "name": "Photoshop",
-            "ids": ["PHXS", "PHSP"],
+            "ids": [ "PHXS", "PHSP" ],
             "version": { "min": "14.0", "max": "14.9" },
             "bin": { "win": "Photoshop.exe", "mac": "Adobe Photoshop CC.app" },
             "x64": true
@@ -11,7 +61,7 @@
         "illustrator": {
             "familyname": "Illustrator",
             "name": "Illustrator",
-            "ids": ["ILST"],
+            "ids": [ "ILST" ],
             "version": { "min": "17.0", "max": "17.9" },
             "bin": { "win": "Support Files/Contents/Windows/Illustrator.exe", "mac": "Adobe Illustrator CC.app" },
             "x64": true
@@ -19,7 +69,7 @@
         "indesign": {
             "familyname": "InDesign",
             "name": "InDesign",
-            "ids": ["IDSN"],
+            "ids": [ "IDSN" ],
             "version": { "min": "9.0", "max": "9.9" },
             "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign CC.app" },
             "x64": false
@@ -27,23 +77,15 @@
         "flash": {
             "familyname": "Flash",
             "name": "Flash",
-            "ids": ["FLPR"],
+            "ids": [ "FLPR" ],
             "version": { "min": "13.0", "max": "13.9" },
             "bin": { "win": "Flash.exe", "mac": "Adobe Flash CC.app" },
             "x64": true
         },
-        "dreamweaver": {
-            "familyname": "Dreamweaver",
-            "name": "Dreamweaver",
-            "ids": ["DRWV"],
-            "version": { "min": "13.0", "max": "13.9" },
-            "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver CC.app" },
-            "x64": false
-        },
         "premiere": {
             "familyname": "Premiere",
             "name": "Premiere Pro",
-            "ids": ["PPRO"],
+            "ids": [ "PPRO" ],
             "version": { "min": "7.0", "max": "7.9" },
             "bin": { "win": "Premiere.exe", "mac": "Adobe Premiere CC.app" },
             "x64": true
@@ -51,7 +93,7 @@
         "prelude": {
             "familyname": "Prelude",
             "name": "Prelude",
-            "ids": ["PRLD"],
+            "ids": [ "PRLD" ],
             "version": { "min": "2.0", "max": "2.9" },
             "bin": { "win": "Prelude.exe", "mac": "Adobe Prelude CC.app" },
             "x64": false
