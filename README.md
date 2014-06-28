@@ -39,9 +39,9 @@ You can use the [_grunt-init-cep_](https://github.com/fcamarlinghi/grunt-init-ce
 Please refer to the [_grunt-init-cep_](https://github.com/fcamarlinghi/grunt-init-cep) documentation for installation and usage instruction.
 
 ### Advanced Setup
-All the icons, manifest, MXI and `update.xml` files provided by the template can also be found in the `res/bundle` folder located inside the plugin installation folder. If you prefer, you can manually copy these files instead of using the _grunt-init-cep_ template.
+Bundle icon, manifest, MXI and `update.xml` files provided by the template can also be found in the `res/bundle` folder located inside the plugin installation folder. If you prefer, you can manually copy these files instead of using the _grunt-init-cep_ template.
 
-_grunt-cep_ is setup to use these files by default, so just copy the `res/bundle` folder to the root of your project (that is, into the same folder of your `Gruntfile.js`) and you should be good to go.
+_grunt-cep_ is setup to use these files by default, so just copy the `res/bundle` folder to the root of your project (that is, the same folder of your `Gruntfile.js`) and you should be good to go.
 
 #### Custom Manifest, XML and MXI Files
 XML and MXI template files are populated at build time using configuration properties. For most extensions the provided templates should work just fine, but for complex extensions it might be necessary to make changes to these files or even provide custom ones.
@@ -179,11 +179,6 @@ An array containing information about each single extension that will be added t
 		<td valign="top">Extension name displayed in the panel's header.</td>
 	</tr>
 	<tr>
-		<td valign="top"><strong>author_name</strong></td>
-		<td valign="top">String</td>
-		<td valign="top">Author or company name.</td>
-	</tr>
-	<tr>
 		<td valign="top"><strong>mainPath</strong></td>
 		<td valign="top">String</td>
 		<td valign="top">The extension entry point, usually <code>index.html</code> or similar.</td>
@@ -286,7 +281,7 @@ Only used with the <code>package</code> profile, holds information related to bu
 ## Usage Examples
 The example configuration below is based on the [_grunt-init-cep_](https://github.com/fcamarlinghi/grunt-init-cep) project template and defines an extension for Adobe Photoshop CC. It registers two tasks (`debug` and `release`) which respectively launch debug inside Adobe Photoshop CC and package the full extension.
 
-All the icons and file templates referenced in the configuration are available in the project template and inside the plugin `res/extension` folder (see the Getting Started section).
+All the icons and file templates referenced in the configuration are available in the project template (see the Getting Started section).
 
 ```javascript
 // cep-config.js
@@ -299,7 +294,8 @@ module.exports =
         author_name: 'Foo',
         mxi_icon: 'bundle/icon-mxi.png',
     },
-    extension: {
+    
+    extensions: [{
         version: '0.1.0',
         id: 'com.foo.exampleBundle.examplePanel',
         name: 'Example Panel',
@@ -307,14 +303,14 @@ module.exports =
         icons: {
             panel: {
                 light: {
-                    normal: 'extension/panel-icons/icon-light.png',
-                    hover: 'extension/panel-icons/icon-light-hover.png',
-                    disabled: 'extension/panel-icons/icon-light-disabled.png'
+                    normal: 'icons/icon-light.png',
+                    hover: 'icons/icon-light-hover.png',
+                    disabled: 'icons/icon-light-disabled.png'
                 },
                 dark: {
-                    normal: 'extension/panel-icons/icon-dark.png',
-                    hover: 'extension/panel-icons/icon-dark-hover.png',
-                    disabled: 'extension/panel-icons/icon-dark-disabled.png'
+                    normal: 'icons/icon-dark.png',
+                    hover: 'icons/icon-dark-hover.png',
+                    disabled: 'icons/icon-dark-disabled.png'
                 },
             }
         },
@@ -325,21 +321,20 @@ module.exports =
         },
         mainPath: 'example.html',
         scriptPath: 'extendscript/example.jsx',
-    },
+    }],
 
     builds: [
         // Adobe Photoshop CC
         {
-            manifest: 'extension/manifest.cc.xml',
+            bundle: { manifest: 'bundle/manifest.bundle.cc.xml' },
+            extensions: [{ manifest: 'bundle/manifest.extension.cc.xml' }],
             products: ['photoshop'],
             source: 'src',
         },
     ],
 
     'package': {
-        mxi: 'extension/example.mxi',
         certificate: {
-            file: 'extension/certificate.p12',
             password: 'example_password',
         }
     },

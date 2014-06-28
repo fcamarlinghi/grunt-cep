@@ -100,11 +100,8 @@ module.exports =
         // Usually provided in a form like "com.developer_name.bundle_name.extension_name"
         id: '',
 
-        // Extension name to display in the panel's header and when installing the extension
+        // Name to display in the extension panel's header
         name: '',
-
-        // Author or company name
-        author_name: '',
 
         // Extension root file
         mainPath: '',
