@@ -11,7 +11,7 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
-**0.2.0**:
+**0.2.1**:
 
 * Added support for packaging multiple extensions in a single extension bundle.
 * Added support for Adobe Creative Cloud 2014 release.
