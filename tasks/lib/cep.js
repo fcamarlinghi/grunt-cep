@@ -37,7 +37,7 @@ module.exports = function (grunt)
         product = product.toLowerCase();
 
         if (!family)
-            family = 'CC';
+            family = 'CC2014';
 
         if (!HOSTS.hasOwnProperty(family))
             throw new Error('Unknown product family "' + family + '"');
