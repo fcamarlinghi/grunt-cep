@@ -190,12 +190,12 @@ An array containing information about each single extension that will be added t
 		<td valign="top">Extension name displayed in the panel's header.</td>
 	</tr>
 	<tr>
-		<td valign="top"><strong>mainPath</strong></td>
+		<td valign="top"><strong>main_path</strong></td>
 		<td valign="top">String</td>
 		<td valign="top">The extension entry point, usually <code>index.html</code> or similar.</td>
 	</tr>
 	<tr>
-		<td valign="top"><strong>scriptPath</strong></td>
+		<td valign="top"><strong>script_path</strong></td>
 		<td valign="top">String</td>
 		<td valign="top">Main ExtendScript file for the extension.</td>
 	</tr>
@@ -330,8 +330,8 @@ module.exports =
             min: { width: 320, height: 440 },
             max: { width: 600, height: 600 },
         },
-        mainPath: 'example.html',
-        scriptPath: 'extendscript/example.jsx',
+        main_path: 'example.html',
+        script_path: 'extendscript/example.jsx',
     }],
 
     builds: [

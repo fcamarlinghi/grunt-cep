@@ -79,10 +79,10 @@ module.exports = function (grunt)
 
                     if (grunt.file.exists(dotdebug_file))
                     {
-                        if (typeof build.launch.hostPort !== 'number' || build.launch.hostPort < 0)
+                        if (typeof build.launch.host_port !== 'number' || build.launch.host_port < 0)
                         {
                             grunt.verbose.or.error();
-                            grunt.fatal('Invalid host debug port ' + build.launch.hostPort + '.');
+                            grunt.fatal('Invalid host debug port ' + build.launch.host_port + '.');
                         }
 
                         var data = { 'build': build },

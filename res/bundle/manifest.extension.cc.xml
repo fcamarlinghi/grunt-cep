@@ -1,8 +1,8 @@
 ﻿<Extension Id="<%= extension.id %>">
 	<DispatchInfo>
 		<Resources>
-			<MainPath>./<%= extension.mainPath %></MainPath>
-			<ScriptPath>./<%= extension.scriptPath %></ScriptPath>
+			<MainPath>./<%= extension.main_path %></MainPath>
+			<ScriptPath>./<%= extension.script_path %></ScriptPath>
 		</Resources>
 		<Lifecycle>
 			<AutoVisible>true</AutoVisible>

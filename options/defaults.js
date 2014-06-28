@@ -104,10 +104,10 @@ module.exports =
         name: '',
 
         // Extension root file
-        mainPath: '',
+        main_path: '',
 
         // Extension ExtendScript root file
-        scriptPath: '',
+        script_path: '',
 
         // Extension icons. Each icon should be a 23x23px PNG.
         icons: {
@@ -176,7 +176,7 @@ module.exports =
         // Default host port used for debug. If bundling multiple
         // extensions, this will be used for the first one, with
         // other extensions using incremental ports (i.e. 8089, 8090, etc.)
-        hostPort: 8088,
+        host_port: 8088,
     },
 
 

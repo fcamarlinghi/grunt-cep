@@ -4,22 +4,22 @@
   <Extension Id="<%= build.extensions[i].id %>">
     <HostList>
       <!-- Photoshop -->
-      <Host Name="PHXS" Port="<%= build.launch.hostPort + i %>"/>
+      <Host Name="PHXS" Port="<%= build.launch.host_port + i %>"/>
 
       <!-- Illustrator -->
-      <Host Name="ILST" Port="<%= build.launch.hostPort + i %>"/>
+      <Host Name="ILST" Port="<%= build.launch.host_port + i %>"/>
 
       <!-- InDesign -->
-      <Host Name="IDSN" Port="<%= build.launch.hostPort + i %>" />
+      <Host Name="IDSN" Port="<%= build.launch.host_port + i %>" />
 
       <!-- Premiere -->
-      <Host Name="PPRO" Port="<%= build.launch.hostPort + i %>" />
+      <Host Name="PPRO" Port="<%= build.launch.host_port + i %>" />
 
       <!-- PRELUDE -->
-      <Host Name="PRLD" Port="<%= build.launch.hostPort + i %>" />
+      <Host Name="PRLD" Port="<%= build.launch.host_port + i %>" />
 
       <!-- FLASH Pro -->
-      <Host Name="FLPR" Port="<%= build.launch.hostPort + i %>" />
+      <Host Name="FLPR" Port="<%= build.launch.host_port + i %>" />
     </HostList>
   </Extension>
   <% } %>
