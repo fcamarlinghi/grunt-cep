@@ -124,7 +124,7 @@ module.exports = function (grunt)
                             }
                         }
                     }
-                    
+
                     if (!build || !product || !family)
                     {
                         grunt.log.error();
@@ -301,6 +301,33 @@ module.exports = function (grunt)
                 {
                     if (options['package'].update.enabled)
                         xml.update(callback, options);
+                },
+
+                /**
+                 * Copy custom files.
+                 */
+                function (callback)
+                {
+                    if (options.bundle.files)
+                    {
+                        var message = 'Copying custom files...';
+                        grunt.verbose.writeln(message).or.write(message);
+
+                        options.bundle.files.forEach(function (file)
+                        {
+                            if (typeof file === 'object')
+                            {
+                                cep.utils.copy(file, options.staging + '/', file.src);
+                            }
+                            else
+                            {
+                                cep.utils.copy({}, options.staging + '/', file);
+                            }
+                        });
+
+                        grunt.verbose.or.ok();
+                        callback();
+                    }
                 },
 
                 /**
