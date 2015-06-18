@@ -4,28 +4,28 @@
   <Extension Id="<%= build.extensions[i].id %>">
     <HostList>
       <!-- Photoshop -->
-      <Host Name="PHXS" Port="<%= build.launch.host_port + i %>"/>
+      <Host Name="PHXS" Port="<%= build.launch.host_port + (i * 100) + 0 %>"/>
 
       <!-- Illustrator -->
-      <Host Name="ILST" Port="<%= build.launch.host_port + i %>"/>
+      <Host Name="ILST" Port="<%= build.launch.host_port + (i * 100) + 1 %>"/>
 
       <!-- InDesign -->
-      <Host Name="IDSN" Port="<%= build.launch.host_port + i %>" />
+      <Host Name="IDSN" Port="<%= build.launch.host_port + (i * 100) + 2 %>" />
 
       <!-- After Effects -->
-      <Host Name="AEFT" Port="<%= build.launch.host_port + i %>" />
+      <Host Name="AEFT" Port="<%= build.launch.host_port + (i * 100) + 3 %>" />
 
       <!-- Premiere -->
-      <Host Name="PPRO" Port="<%= build.launch.host_port + i %>" />
+      <Host Name="PPRO" Port="<%= build.launch.host_port + (i * 100) + 4 %>" />
 
       <!-- Prelude -->
-      <Host Name="PRLD" Port="<%= build.launch.host_port + i %>" />
+      <Host Name="PRLD" Port="<%= build.launch.host_port + (i * 100) + 5 %>" />
 
       <!-- Flash -->
-      <Host Name="FLPR" Port="<%= build.launch.host_port + i %>" />
+      <Host Name="FLPR" Port="<%= build.launch.host_port + (i * 100) + 6 %>" />
 
       <!-- Dreamweaver -->
-      <Host Name="DRWV" Port="<%= build.launch.host_port + i %>" />
+      <Host Name="DRWV" Port="<%= build.launch.host_port + (i * 100) + 7 %>" />
     </HostList>
   </Extension>
   <% } %>

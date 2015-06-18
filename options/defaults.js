@@ -173,10 +173,18 @@ module.exports =
         // specified in the first build of the 'builds' array
         family: '',
 
-        // Default host port used for debug. If bundling multiple
-        // extensions, this will be used for the first one, with
-        // other extensions using incremental ports (i.e. 8089, 8090, etc.)
-        host_port: 8088,
+        // Default host port used for debug.
+        //
+        // In order to support debugging an extension inside multiple products at
+        // the same time, each supported product has an unique debug port assigned:
+        // - Photoshop: 8000
+        // - Illustrator: 8001
+        // - InDesign: 8002
+        // - Etc. For a complete list, see ".debug" file.
+        //
+        // If bundling multiple extensions, each extension will have its debug
+        // port incremented by 100 (i.e. 8000, 8100, 8200, etc.), see ".debug" file.
+        host_port: 8000,
     },
 
 
