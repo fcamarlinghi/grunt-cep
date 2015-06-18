@@ -23,9 +23,9 @@
   ],
   "main": "Gruntfile.js",
   "dependencies": {
-    "lodash": "latest",
-    "async": "latest",
-    "node-uuid": "latest"
+    "lodash": "~3.9.3",
+    "async": "~1.2.1",
+    "node-uuid": "~1.4.3"
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
