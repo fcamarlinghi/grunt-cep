@@ -22,13 +22,10 @@
     }
   ],
   "main": "Gruntfile.js",
-  "engines": {
-    "node": ">= 0.8.0"
-  },
   "dependencies": {
-    "lodash": "~2.4.1",
-    "async": "~0.2.9",
-    "node-uuid": "~1.4.1"
+    "lodash": "latest",
+    "async": "latest",
+    "node-uuid": "latest"
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
