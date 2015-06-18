@@ -11,6 +11,18 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.3.0**:
+
+* Added support for Adobe Creative Cloud 2015 release.
+* Added support for debugging extensions inside multiple host applications at the same time. This required some changes to the way debug ports are assigned to extensions (base port is now *8000* instead than *8080*), see the updated configuration section below if upgrading from a previous version.
+* Added experimental support for bundling custom files alongside the extension (see `bundle.files` in the configuration section below).
+* Improved Mac support, still not completely working.
+* Added preliminary support for After Effects and Dreamweaver.
+* Updated dependencies to the latest available versions.
+
+This release does not contain breaking changes to the API.
+
+### Previous Releases
 **0.2.1**:
 
 * Added support for packaging multiple extensions in a single extension bundle.
@@ -18,7 +30,6 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 **Warning:** contains breaking changes to the task configuration options, see the updated configuration section below if upgrading from a previous version.
 
-### Previous Releases
 **0.1.2**
 
 * Improved changelogs management, bug fixes.
@@ -32,7 +43,7 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 * First release.
 
 ## Getting Started
-This plugin requires Grunt `~0.4.4`. Please refer to the [official documentation](http://gruntjs.com/getting-started) to get started with Grunt. You may install this plugin with this command:
+This plugin requires Grunt `~0.4.5`. Please refer to the [official documentation](http://gruntjs.com/getting-started) to get started with Grunt. You may install this plugin with this command:
 
 ```shell
 npm install grunt-cep --save-dev
@@ -168,6 +179,11 @@ Contains information about the extension bundle, that is the [container](http://
 		<td valign="top" width="50px">String</td>
 		<td valign="top">Bundle manifest file template, filled in at run-time with bundle information. You can one of the provided manifests (i.e. <code>bundle/manifest.bundle.cc.xml</code>) or provide your own. This is usually better specified in the <strong>builds</strong> array to allow per-product configuration (see example below).</td>
 	</tr>
+	<tr>
+		<td valign="top" width="140px"><strong>files</strong></td>
+		<td valign="top" width="50px">Array</td>
+		<td valign="top">Since 0.3.0 - A list of additional files that will be added to the extension bundle. This is passed directly to Grunt and supports Grunt's <i>Compact</i> and <i>Files Array</i> formats. See <a href="http://gruntjs.com/configuring-tasks#files">Grunt documentation</a> for additional information. </td>
+	</tr>
 </table>
 
 #### options.extensions
@@ -253,7 +269,16 @@ Only used when the <code>launch</code> profile is active, holds information need
 	<tr>
 		<td valign="top"><strong>host_port</strong></td>
 		<td valign="top">Number</td>
-		<td valign="top">Default host port used for debug. If bundling multiple extensions, this will be used for the first one, with other extensions using incremental ports (i.e. 8089, 8090, etc.).</td>
+		<td valign="top">
+			<p>Default host port used for debug.</p>
+			<p>In order to support debugging an extension inside multiple products at the same time, each supported product will have an unique debug port assigned:</p>
+			<ul>
+				<li><strong>Photoshop</strong>: 8000</li>
+				<li><strong>Illustrator</strong>: 8001</li>
+				<li>Etc. For a complete list, see the <code>.debug</code> file.</li>
+			</ul>
+			<p>If bundling multiple extensions, each extension will have its debug port incremented by 100 (i.e. 8000, 8100, 8200, etc.)</p>
+		</td>
 	</tr>
 </table>
 
