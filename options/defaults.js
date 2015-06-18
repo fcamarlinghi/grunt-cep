@@ -83,6 +83,11 @@ module.exports =
 
         // License agreement shown when installing the extension (supports HTML markup)
         license_agreement: '',
+
+        // Additional files that will be added to the extension bundle
+        // This is passed directly to Grunt and supports Grunt's Compact and Files Array formats
+        // (see http://gruntjs.com/configuring-tasks#files for additional information)
+        files: [],
     },
 
 
@@ -175,8 +180,8 @@ module.exports =
 
         // Default host port used for debug.
         //
-        // In order to support debugging an extension inside multiple products at
-        // the same time, each supported product has an unique debug port assigned:
+        // In order to support debugging an extension inside multiple products at the
+        // same time, each supported product will have an unique debug port assigned:
         // - Photoshop: 8000
         // - Illustrator: 8001
         // - InDesign: 8002
