@@ -12,14 +12,20 @@
       <!-- InDesign -->
       <Host Name="IDSN" Port="<%= build.launch.host_port + i %>" />
 
+      <!-- After Effects -->
+      <Host Name="AEFT" Port="<%= build.launch.host_port + i %>" />
+
       <!-- Premiere -->
       <Host Name="PPRO" Port="<%= build.launch.host_port + i %>" />
 
-      <!-- PRELUDE -->
+      <!-- Prelude -->
       <Host Name="PRLD" Port="<%= build.launch.host_port + i %>" />
 
-      <!-- FLASH Pro -->
+      <!-- Flash -->
       <Host Name="FLPR" Port="<%= build.launch.host_port + i %>" />
+
+      <!-- Dreamweaver -->
+      <Host Name="DRWV" Port="<%= build.launch.host_port + i %>" />
     </HostList>
   </Extension>
   <% } %>

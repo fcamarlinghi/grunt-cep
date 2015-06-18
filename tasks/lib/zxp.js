@@ -17,10 +17,11 @@
 module.exports = function (grunt)
 {
     'use strict';
-    var path = require('path');
-    var _ = require('lodash');
-    var async = require('async');
-    var cep = require('../lib/cep.js')(grunt);
+
+    var path = require('path'),
+        _ = require('lodash'),
+        async = require('async'),
+        cep = require('../lib/cep.js')(grunt);
 
     // Gets signing toolkit executable path
     function get_zxp_path()
@@ -29,14 +30,11 @@ module.exports = function (grunt)
 
         if (global.IS_WINDOWS)
         {
-            if (global.IS_X64)
-                exec_name = 'ccextensionswin64.exe';
-            else
-                exec_name = 'ccextensionswin32.exe';
+            exec_name = 'ZXPSignCmd.exe';
         }
         else
         {
-            exec_name = 'ccextensionsmac.dmg';
+            exec_name = 'ZXPSignCmd.dmg';
         }
 
         return path.resolve(__dirname, '../../bin/' + exec_name);
@@ -75,7 +73,7 @@ module.exports = function (grunt)
                 grunt.log.error(result);
                 grunt.fatal('An error occurred when generating the self-signed certificate.');
             }
-            
+
             callback(error, result);
         });
     };
@@ -86,10 +84,14 @@ module.exports = function (grunt)
     var sign = function (callback, input_folder, output_file, options)
     {
         if (!output_file)
+        {
             grunt.fatal('Invalid output file.');
+        }
 
         if (!input_folder)
+        {
             grunt.fatal('Invalid input folder.');
+        }
 
         var spawn_options = {
                 cmd: get_zxp_path(),
@@ -99,7 +101,7 @@ module.exports = function (grunt)
                     output_file,
                     options['package'].certificate.file,
                     options['package'].certificate.password,
-                ]
+                ],
             },
             errors = [];
 
@@ -120,6 +122,7 @@ module.exports = function (grunt)
                 callback();
             }
         });
+
         spawned.stdout.on('data', function (data) { grunt.log.writeln(data); });
         spawned.stderr.on('data', function (data) { errors.push(data); });
     };
