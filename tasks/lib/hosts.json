@@ -22,7 +22,7 @@
             "ids": [ "IDSN" ],
             "version": { "min": "11.0", "max": "11.9" },
             "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign CC 2015/Adobe InDesign CC 2015.app" },
-            "x64": false
+            "x64": true
         },
         "flash": {
             "familyname": "Flash",
@@ -33,7 +33,7 @@
             "x64": true
         },
         "aftereffects": {
-            "familyname": "After Effects",
+            "familyname": "AfterEffects",
             "name": "After Effects",
             "ids": [ "AEFT" ],
             "version": { "min": "14.0", "max": "14.9" },
@@ -63,6 +63,14 @@
             "version": { "min": "15.0", "max": "15.9" },
             "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver CC 2015/Adobe Dreamweaver CC 2015.app" },
             "x64": false
+        },
+        "incopy": {
+            "familyname": "InCopy",
+            "name": "InCopy",
+            "ids": [ "AICY" ],
+            "version": { "min": "11.0", "max": "11.9" },
+            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy CC 2015/Adobe InCopy CC 2015.app" },
+            "x64": true
         }
     },
     "CC2014": {
@@ -88,7 +96,7 @@
             "ids": [ "IDSN" ],
             "version": { "min": "10.0", "max": "10.9" },
             "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign CC 2014/Adobe InDesign CC 2014.app" },
-            "x64": false
+            "x64": true
         },
         "flash": {
             "familyname": "Flash",
@@ -99,7 +107,7 @@
             "x64": true
         },
         "aftereffects": {
-            "familyname": "After Effects",
+            "familyname": "AfterEffects",
             "name": "After Effects",
             "ids": [ "AEFT" ],
             "version": { "min": "13.0", "max": "13.9" },
@@ -129,6 +137,14 @@
             "version": { "min": "14.0", "max": "14.9" },
             "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver CC 2014/Adobe Dreamweaver CC 2014.app" },
             "x64": false
+        },
+        "incopy": {
+            "familyname": "InCopy",
+            "name": "InCopy",
+            "ids": [ "AICY" ],
+            "version": { "min": "10.0", "max": "10.9" },
+            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy CC 2014/Adobe InCopy CC 2014.app" },
+            "x64": true
         }
     },
     "CC": {
@@ -154,7 +170,7 @@
             "ids": [ "IDSN" ],
             "version": { "min": "9.0", "max": "9.9" },
             "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign CC/Adobe InDesign CC.app" },
-            "x64": false
+            "x64": true
         },
         "flash": {
             "familyname": "Flash",
@@ -165,7 +181,7 @@
             "x64": true
         },
         "aftereffects": {
-            "familyname": "After Effects",
+            "familyname": "AfterEffects",
             "name": "After Effects",
             "ids": [ "AEFT" ],
             "version": { "min": "12.0", "max": "12.9" },
@@ -195,6 +211,14 @@
             "version": { "min": "13.0", "max": "13.9" },
             "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver CC/Adobe Dreamweaver CC.app" },
             "x64": false
+        },
+        "incopy": {
+            "familyname": "InCopy",
+            "name": "InCopy",
+            "ids": [ "AICY" ],
+            "version": { "min": "9.0", "max": "9.9" },
+            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy CC/Adobe InCopy CC.app" },
+            "x64": true
         }
     }
 }
