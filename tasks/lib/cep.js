@@ -17,8 +17,9 @@
 module.exports = function (grunt)
 {
     'use strict';
-    var path = require('path');
-    var HOSTS = require('./hosts.json');
+    var path = require('path'),
+        HOSTS = require('./hosts.json');
+
     var cep = {};
 
     // *************************************************************
@@ -37,13 +38,19 @@ module.exports = function (grunt)
         product = product.toLowerCase();
 
         if (!family)
-            family = 'CC2014';
+        {
+            family = 'CC2015';
+        }
 
         if (!HOSTS.hasOwnProperty(family))
+        {
             throw new Error('Unknown product family "' + family + '"');
+        }
 
         if (!HOSTS[family].hasOwnProperty(product))
+        {
             throw new Error('Unknown product "' + product + '" (' + family + ')');
+        }
 
         return HOSTS[family][product];
     };
@@ -65,10 +72,14 @@ module.exports = function (grunt)
             host = hosts.getProduct(product, families[i]);
 
             if (!min || parseFloat(host.version.min) < parseFloat(min))
+            {
                 min = host.version.min;
+            }
 
             if (!max || parseFloat(host.version.max) > parseFloat(max))
+            {
                 max = host.version.max;
+            }
         }
 
         return { min: min, max: max };
@@ -96,14 +107,14 @@ module.exports = function (grunt)
     // *************************************************************
     // Utils
     var utils = cep.utils = {};
-    
+
     /**
      * Recursive copy utility.
      */
     utils.copy = function (options, dest, patterns)
     {
-        options || (options = { });
-        
+        options || (options = {});
+
         grunt.file.expand.apply(null, [options, patterns]).forEach(function (file)
         {
             var src = (options.cwd) ? path.join(options.cwd, file) : file;
