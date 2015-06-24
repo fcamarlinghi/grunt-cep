@@ -26,6 +26,9 @@
 
       <!-- Dreamweaver -->
       <Host Name="DRWV" Port="<%= build.launch.host_port + (i * 100) + 7 %>" />
+
+      <!-- InCopy -->
+      <Host Name="AICY" Port="<%= build.launch.host_port + (i * 100) + 8 %>" />
     </HostList>
   </Extension>
   <% } %>
