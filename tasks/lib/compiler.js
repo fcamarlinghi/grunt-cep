@@ -192,8 +192,12 @@ module.exports = function (grunt)
                 var folder_name = launch_config.host.hasOwnProperty('folder') ? launch_config.host.folder : '/Adobe ' + launch_config.host.name + ' ' + folder_family[launch_config.family];
                 launch_config.app_folder = path.join(folder_apps, folder_name);
 
+                // On Windows X64, CC apps have " (64 Bit)" added to their folder path if they are installed with 64bit support
+                // This is no longer the case starting from CC2014
                 if (global.IS_WINDOWS && global.IS_X64 && launch_config.family === 'CC' && launch_config.host.x64)
+                {
                     launch_config.app_folder += ' (64 Bit)';
+                }
 
                 if (!grunt.file.exists(launch_config.app_folder))
                 {
@@ -223,7 +227,7 @@ module.exports = function (grunt)
                 if (global.IS_WINDOWS)
                 {
                     options.cmd = 'Taskkill';
-                    options.args = ['/IM', launch_config.host.bin.win];
+                    options.args = ['/IM', path.basename(launch_config.app_bin)];
                 }
                 else
                 {
