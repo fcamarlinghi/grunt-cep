@@ -2,9 +2,10 @@
 	<DispatchInfo>
 		<Resources>
 			<MainPath>./<%= extension.main_path %></MainPath>
-			    <CEFCommandLine>
-                <%= cef_params %>
-                </CEFCommandLine>
+			<ScriptPath>./<%= extension.script_path %></ScriptPath>
+		    <CEFCommandLine>
+            	<%= cef_params %>
+            </CEFCommandLine>
 		</Resources>
 		<Lifecycle>
 			<AutoVisible>true</AutoVisible>
