@@ -2,7 +2,9 @@
 	<DispatchInfo>
 		<Resources>
 			<MainPath>./<%= extension.main_path %></MainPath>
-			<ScriptPath>./<%= extension.script_path %></ScriptPath>
+			    <CEFCommandLine>
+                <%= cef_params %>
+                </CEFCommandLine>
 		</Resources>
 		<Lifecycle>
 			<AutoVisible>true</AutoVisible>
@@ -25,13 +27,14 @@
 				</MinSize>
 			</Geometry>
       <Icons>
-        <Icon Type="Normal">./<%= extension.icons.light.normal %></Icon>
-        <Icon Type="RollOver">./<%= extension.icons.light.hover %></Icon>
-        <Icon Type="Disabled">./<%= extension.icons.light.disabled %></Icon>
-        <Icon Type="DarkNormal">./<%= extension.icons.dark.normal %></Icon>
-        <Icon Type="DarkRollOver">./<%= extension.icons.dark.hover %></Icon>
-        <Icon Type="DarkDisabled">./<%= extension.icons.dark.disabled %></Icon>
+        <Icon Type="Normal">./<%= extension.icons.panel.light.normal %></Icon>
+        <Icon Type="RollOver">./<%= extension.icons.panel.light.hover %></Icon>
+        <Icon Type="Disabled">./<%= extension.icons.panel.light.disabled %></Icon>
+        <Icon Type="DarkNormal">./<%= extension.icons.panel.dark.normal %></Icon>
+        <Icon Type="DarkRollOver">./<%= extension.icons.panel.dark.hover %></Icon>
+        <Icon Type="DarkDisabled">./<%= extension.icons.panel.dark.disabled %></Icon>
       </Icons>
 		</UI>
 	</DispatchInfo>
 </Extension>
+
