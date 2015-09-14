@@ -48,6 +48,14 @@ module.exports = function (grunt)
 
         build.extensions.forEach(function (extension)
         {
+            //<CEFCommandLine>
+            var cef_params = [];
+            extension.cef_params.forEach(function(cef_param)
+            {
+                cef_params.push('<Parameter>'+ cef_param +'</Parameter>')
+            });
+            extension.cef_params = cef_params.join('\n\t\t\t\t\t');
+
             var data = _.extend({}, { 'extension': extension, 'build': build, });
 
             // <ExtensionList>
