@@ -10,7 +10,7 @@
 			<AutoVisible>true</AutoVisible>
 		</Lifecycle>
 		<UI>
-			<Type>Panel</Type>
+			<Type><%= extension.type %></Type>
 			<Menu><%= extension.name %></Menu>
 			<Geometry>
 				<Size>
