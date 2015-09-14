@@ -216,6 +216,11 @@ An array containing information about each single extension that will be added t
 		<td valign="top">Main ExtendScript file for the extension.</td>
 	</tr>
 	<tr>
+		<td valign="top"><strong>cef_params</strong></td>
+		<td valign="top">Array</td>
+		<td valign="top"> <a href="https://github.com/Adobe-CEP/CEP-Resources/wiki/CEP-6-HTML-Extension-Cookbook-for-CC-2015#command_line_parameters">Commonly used CEF command parameters</a> </td>
+	</tr>
+	<tr>
 		<td valign="top"><strong>icons</strong></td>
 		<td valign="top">Object</td>
 		<td valign="top">Extension icons, each icon should be a 23x23px PNG. Check the default values in the <code>/options/defaults.js</code> source file for a full description of the object.</td>
