@@ -114,6 +114,12 @@ module.exports =
         // Extension ExtendScript root file
         script_path: '',
 
+        // CEF command line parameters
+        cef_params: [],
+
+        // Extension type (i.e. "Panel", "ModalDialog", etc.)
+        type: 'Panel',
+
         // Extension icons. Each icon should be a 23x23px PNG.
         icons: {
             light: {

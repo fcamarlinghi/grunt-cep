@@ -218,7 +218,12 @@ An array containing information about each single extension that will be added t
 	<tr>
 		<td valign="top"><strong>cef_params</strong></td>
 		<td valign="top">Array</td>
-		<td valign="top"> <a href="https://github.com/Adobe-CEP/CEP-Resources/wiki/CEP-6-HTML-Extension-Cookbook-for-CC-2015#command_line_parameters">Commonly used CEF command parameters</a> </td>
+		<td valign="top">CEF command line parameters (see <a href="https://github.com/Adobe-CEP/CEP-Resources/wiki/CEP-6-HTML-Extension-Cookbook-for-CC-2015#command_line_parameters">documentation</a> for a list of supported parameters).</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>type</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">Extension type (i.e. "Panel", "ModalDialog", etc.).</td>
 	</tr>
 	<tr>
 		<td valign="top"><strong>icons</strong></td>
