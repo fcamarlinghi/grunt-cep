@@ -11,6 +11,15 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.3.1**:
+
+* Improved Mac support.
+* Added support for CEF command line parameters and extension type in config (see `extension.cef_params` and `extension.type` in the configuration section below).
+
+Thanks to *MattMcNam* and *jDmacD* for contributing these changes.
+This release does not contain breaking changes to the API.
+
+### Previous Releases
 **0.3.0**:
 
 * Added support for Adobe Creative Cloud 2015 release.
@@ -22,7 +31,6 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 This release does not contain breaking changes to the API.
 
-### Previous Releases
 **0.2.1**:
 
 * Added support for packaging multiple extensions in a single extension bundle.
