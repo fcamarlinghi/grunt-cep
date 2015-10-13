@@ -3,12 +3,15 @@
 		<Resources>
 			<MainPath>./<%= extension.main_path %></MainPath>
 			<ScriptPath>./<%= extension.script_path %></ScriptPath>
+		    <CEFCommandLine>
+            	<%= cef_params %>
+            </CEFCommandLine>
 		</Resources>
 		<Lifecycle>
 			<AutoVisible>true</AutoVisible>
 		</Lifecycle>
 		<UI>
-			<Type>Panel</Type>
+			<Type><%= extension.type %></Type>
 			<Menu><%= extension.name %></Menu>
 			<Geometry>
 				<Size>
@@ -35,3 +38,4 @@
 		</UI>
 	</DispatchInfo>
 </Extension>
+
