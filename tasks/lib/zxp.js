@@ -34,7 +34,7 @@ module.exports = function (grunt)
         }
         else
         {
-            exec_name = 'ZXPSignCmd.dmg';
+            exec_name = 'ZXPSignCmd';
         }
 
         return path.resolve(__dirname, '../../bin/' + exec_name);
