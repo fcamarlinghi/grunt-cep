@@ -42,7 +42,7 @@
         },
         "premiere": {
             "familyname": "Premiere",
-            "name": "Premiere",
+            "name": "Premiere Pro",
             "ids": [ "PPRO" ],
             "version": { "min": "9.0", "max": "9.9" },
             "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro CC 2015.app" },
@@ -116,7 +116,7 @@
         },
         "premiere": {
             "familyname": "Premiere",
-            "name": "Premiere",
+            "name": "Premiere Pro",
             "ids": [ "PPRO" ],
             "version": { "min": "8.0", "max": "8.9" },
             "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro CC 2014.app" },
@@ -190,7 +190,7 @@
         },
         "premiere": {
             "familyname": "Premiere",
-            "name": "Premiere",
+            "name": "Premiere Pro",
             "ids": [ "PPRO" ],
             "version": { "min": "7.0", "max": "7.9" },
             "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro CC.app" },
