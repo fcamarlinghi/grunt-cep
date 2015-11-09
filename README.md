@@ -11,15 +11,20 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.3.2**:
+
+* Improved Premiere support.
+
+Thanks to *Rhuagh* for contributing this fix. This release does not contain API changes.
+
+### Previous Releases
 **0.3.1**:
 
 * Improved Mac support.
 * Added support for CEF command line parameters and extension type in config (see `extension.cef_params` and `extension.type` in the configuration section below).
 
-Thanks to *MattMcNam* and *jDmacD* for contributing these changes.
-This release does not contain breaking changes to the API.
+Thanks to *MattMcNam* and *jDmacD* for contributing these changes. This release does not contain API changes.
 
-### Previous Releases
 **0.3.0**:
 
 * Added support for Adobe Creative Cloud 2015 release.
@@ -29,7 +34,7 @@ This release does not contain breaking changes to the API.
 * Added preliminary support for After Effects and Dreamweaver.
 * Updated dependencies to the latest available versions.
 
-This release does not contain breaking changes to the API.
+This release does not contain API changes.
 
 **0.2.1**:
 
