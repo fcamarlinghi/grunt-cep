@@ -36,7 +36,7 @@
             "familyname": "AfterEffects",
             "name": "After Effects",
             "ids": [ "AEFT" ],
-            "version": { "min": "14.0", "max": "14.9" },
+            "version": { "min": "13.5", "max": "13.9" },
             "bin": { "win": "Support Files/AfterFX.exe", "mac": "Adobe After Effects CC 2015.app" },
             "x64": true
         },
@@ -110,7 +110,7 @@
             "familyname": "AfterEffects",
             "name": "After Effects",
             "ids": [ "AEFT" ],
-            "version": { "min": "13.0", "max": "13.9" },
+            "version": { "min": "13.0", "max": "13.4" },
             "bin": { "win": "Support Files/AfterFX.exe", "mac": "Adobe After Effects CC 2014.app" },
             "x64": true
         },
