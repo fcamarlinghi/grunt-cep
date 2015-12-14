@@ -166,13 +166,13 @@ module.exports = function (grunt)
 
         for (var product in product_versions)
         {
-            if (familyname_products.indexOf(familyname_products))
+            if (familyname_products.indexOf(cep.hosts.getProduct(product).familyname.toLowerCase()) > -1)
             {
                 data.products.push('<product familyname="' + cep.hosts.getProduct(product).familyname + '" maxversion="' + product_versions[product].max + '" primary="true" version="' + product_versions[product].min + '" />');
             }
             else
             {
-                data.products.push('<product name="' + cep.hosts.getProduct(product).name + '" maxversion="' + product_versions[product].max + '" primary="true" version="' + product_versions[product].min + '" />');
+                data.products.push('<product name="' + cep.hosts.getProduct(product).familyname + '" maxversion="' + product_versions[product].max + '" primary="true" version="' + product_versions[product].min + '" />');
             }
         }
 
