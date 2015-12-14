@@ -160,19 +160,19 @@ module.exports = function (grunt)
         }
 
         // Create <product> list
-        // NOTE: only some products supports the "familyname" attribute so we should filter them out
+        // NOTE: only some products support the "familyname" attribute so we should filter them out
         // (see https://helpx.adobe.com/extension-manager/kb/general-mxi-elements.html#id_64891)
         var familyname_products = ['illustrator', 'photoshop', 'incopy', 'indesign'];
 
         for (var product in product_versions)
         {
-            if (familyname_products.indexOf(familyname_products))
+            if (familyname_products.indexOf(product) > -1)
             {
                 data.products.push('<product familyname="' + cep.hosts.getProduct(product).familyname + '" maxversion="' + product_versions[product].max + '" primary="true" version="' + product_versions[product].min + '" />');
             }
             else
             {
-                data.products.push('<product name="' + cep.hosts.getProduct(product).name + '" maxversion="' + product_versions[product].max + '" primary="true" version="' + product_versions[product].min + '" />');
+                data.products.push('<product name="' + cep.hosts.getProduct(product).familyname + '" maxversion="' + product_versions[product].max + '" primary="true" version="' + product_versions[product].min + '" />');
             }
         }
 
