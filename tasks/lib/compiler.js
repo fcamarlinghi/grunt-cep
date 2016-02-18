@@ -231,8 +231,8 @@ module.exports = function (grunt)
                 }
                 else
                 {
-                    options.cmd = 'kill';
-                    options.args = ['-9', '`ps -ef | grep "' + launch_config.host.bin.mac + '" | grep -v grep | awk \'{print $2}\'`'];
+                    options.cmd = 'killall';
+                    options.args = [launch_config.host.bin.mac.slice(0, -4)];
                 }
 
                 grunt.verbose.writeln((options.cmd + ' ' + options.args.join(' ')).magenta)
