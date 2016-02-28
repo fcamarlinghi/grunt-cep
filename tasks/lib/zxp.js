@@ -105,6 +105,11 @@ module.exports = function (grunt)
             },
             errors = [];
 
+        if(options['timestamp']) {
+            spawn_options.args.push('-tsa');
+            spawn_options.args.push(options['timestamp']);
+        }
+
         grunt.verbose.writeln(output_file.white);
         grunt.verbose.writeln((spawn_options.cmd + ' ' + spawn_options.args.join(' ')).magenta)
         .or.write('Creating ZXP package at ' + output_file.cyan + '...');
