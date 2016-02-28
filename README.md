@@ -11,13 +11,20 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.3.3**:
+
+* Added support for ZXPSignCmd `-tsa` option (see `package.timestamp_url` in the configuration section below).
+* Various bug fixes.
+
+Thanks to *Rhuagh* and *MattMcNam* for contributing fixes and improvements. This release does not contain API changes.
+
+### Previous Releases
 **0.3.2**:
 
 * Improved Premiere support.
 
 Thanks to *Rhuagh* for contributing this fix. This release does not contain API changes.
 
-### Previous Releases
 **0.3.1**:
 
 * Improved Mac support.
@@ -313,6 +320,11 @@ Only used with the <code>package</code> profile, holds information related to bu
 		<td valign="top" width="140px"><strong>mxi</strong></td>
 		<td valign="top" width="50px">String</td>
 		<td valign="top">Path to the MXI file template for this bundle. You can use the provided manifest template (<code>bundle/template.mxi</code>) or provide your own.</td>
+	</tr>
+	<tr>
+		<td valign="top"><strong>timestamp_url</strong></td>
+		<td valign="top">String</td>
+		<td valign="top">Timestamp server URL, passed as <code>-tsa</code> option to ZXPSignCmd.</td>
 	</tr>
 	<tr>
 		<td valign="top"><strong>certificate</strong></td>
