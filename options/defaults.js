@@ -209,6 +209,9 @@ module.exports =
         // MXI file template
         mxi: 'bundle/template.mxi',
 
+        // Timestamp server URL
+        timestamp_url: '',
+
         // Certificate used to sign the bundle package
         certificate: {
             // Certificate file
