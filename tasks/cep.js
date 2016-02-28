@@ -301,6 +301,8 @@ module.exports = function (grunt)
                 {
                     if (options['package'].update.enabled)
                         xml.update(callback, options);
+                    else
+                        callback();
                 },
 
                 /**
