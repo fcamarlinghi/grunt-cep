@@ -120,6 +120,16 @@ module.exports =
         // Extension type (i.e. "Panel", "ModalDialog", etc.)
         type: 'Panel',
 
+        // Extension lifecycle
+        lifecycle: {
+
+            // True to make the extension’s UI visible automatically when launched
+            auto_visible: true,
+
+            // A set of events that can start this extension
+            events: [],
+        },
+
         // Extension icons. Each icon should be a 23x23px PNG.
         icons: {
             light: {
