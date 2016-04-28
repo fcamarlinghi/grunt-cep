@@ -8,12 +8,14 @@
       </CEFCommandLine>
     </Resources>
     <Lifecycle>
-      <AutoVisible><%= extension.lifecycle.auto_visible %></AutoVisible>
+      <AutoVisible><%= (extension.lifecycle) ? extension.lifecycle.auto_visible : true %></AutoVisible>
+      <% if (extension.lifecycle && extension.lifecycle.events && extension.lifecycle.events.length) { %>
       <StartOn>
         <% for (var i = 0; i < extension.lifecycle.events.length; i++) { %>
         <Event><%= extension.lifecycle.events[i] %></Event>
         <% } %>
       </StartOn>
+      <% } %>
     </Lifecycle>
     <UI>
       <Type><%= extension.type %></Type>

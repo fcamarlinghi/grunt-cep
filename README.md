@@ -11,28 +11,32 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.3.5**:
+
+* Added support for extension lifecycle configuration (see `extension.lifecycle` in the configuration section below).
+
+### Previous Releases
 **0.3.4**:
 
 * Added support for ZXPSignCmd `-tsa` option (see `package.timestamp_url` in the configuration section below).
 * Various bug fixes.
 
-Thanks to *Rhuagh* and *MattMcNam* for contributing fixes and improvements. This release does not contain API changes.
+Thanks to *Rhuagh* and *MattMcNam* for contributing fixes and improvements.
 
 Please note: version 0.3.3 was published by mistake and it did not include the ZXPSignCmd binaries. It should **NOT** be used.
 
-### Previous Releases
 **0.3.2**:
 
 * Improved Premiere support.
 
-Thanks to *Rhuagh* for contributing this fix. This release does not contain API changes.
+Thanks to *Rhuagh* for contributing this fix.
 
 **0.3.1**:
 
 * Improved Mac support.
 * Added support for CEF command line parameters and extension type in config (see `extension.cef_params` and `extension.type` in the configuration section below).
 
-Thanks to *MattMcNam* and *jDmacD* for contributing these changes. This release does not contain API changes.
+Thanks to *MattMcNam* and *jDmacD* for contributing these changes.
 
 **0.3.0**:
 
@@ -42,8 +46,6 @@ Thanks to *MattMcNam* and *jDmacD* for contributing these changes. This release 
 * Improved Mac support, still not completely working.
 * Added preliminary support for After Effects and Dreamweaver.
 * Updated dependencies to the latest available versions.
-
-This release does not contain API changes.
 
 **0.2.1**:
 
