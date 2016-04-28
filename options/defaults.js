@@ -126,7 +126,7 @@ module.exports =
         // Extension lifecycle
         lifecycle: {
 
-            // True to make the extension’s UI visible automatically when launched
+            // True to make the extension's UI visible automatically when launched
             auto_visible: true,
 
             // A set of events that can start this extension

@@ -248,6 +248,15 @@ An array containing information about each single extension that will be added t
 		<td valign="top">Extension type (i.e. "Panel", "ModalDialog", etc.).</td>
 	</tr>
 	<tr>
+		<td valign="top"><strong>lifecycle</strong></td>
+		<td valign="top">Object</td>
+		<td valign="top"><p>Extension lifecycle setup. Holds two properties:</p>
+		<ul>
+		    <li><strong>auto_visible</strong> (Boolean): true to make the extension's UI visible automatically when launched.</li>
+		    <li><strong>events</strong> (Array): an array of strings containing the events that can start the extension.</li>
+		</ul></td>
+	</tr>
+	<tr>
 		<td valign="top"><strong>icons</strong></td>
 		<td valign="top">Object</td>
 		<td valign="top">Extension icons, each icon should be a 23x23px PNG. Check the default values in the <code>/options/defaults.js</code> source file for a full description of the object.</td>
@@ -331,7 +340,7 @@ Only used with the <code>package</code> profile, holds information related to bu
 	<tr>
 		<td valign="top"><strong>certificate</strong></td>
 		<td valign="top">Object</td>
-		<td valign="top"><p>Holds information about the certificate used to sign the extension It has two sub-properties:</p>
+		<td valign="top"><p>Holds information about the certificate used to sign the extension. It has two sub-properties:</p>
 		<ul>
 		    <li><strong>file</strong> (String): path to the certificate file. If a valid certificate is not found at the specified location, a self-signed one is automatically generated using the password below.</li>
 		    <li><strong>password</strong> (String): certificate password.</li>
