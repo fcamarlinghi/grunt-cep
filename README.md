@@ -11,12 +11,14 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
-**0.3.3**:
+**0.3.4**:
 
 * Added support for ZXPSignCmd `-tsa` option (see `package.timestamp_url` in the configuration section below).
 * Various bug fixes.
 
 Thanks to *Rhuagh* and *MattMcNam* for contributing fixes and improvements. This release does not contain API changes.
+
+Please note: version 0.3.3 was published by mistake and it did not include the ZXPSignCmd binaries. It should **NOT** be used.
 
 ### Previous Releases
 **0.3.2**:
