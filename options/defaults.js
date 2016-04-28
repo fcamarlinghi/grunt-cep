@@ -88,6 +88,9 @@ module.exports =
         // This is passed directly to Grunt and supports Grunt's Compact and Files Array formats
         // (see http://gruntjs.com/configuring-tasks#files for additional information)
         files: [],
+
+        // Bundle manifest file template
+        manifest: 'bundle/manifest.bundle.cc.xml',
     },
 
 
@@ -150,6 +153,9 @@ module.exports =
             min: { width: 320, height: 300 },
             max: { width: 800, height: 2400 },
         },
+
+        // Extension manifest file template
+        manifest: 'bundle/manifest.extension.xml',
     }],
 
 
@@ -165,11 +171,11 @@ module.exports =
      */
     builds: [
         {
-            // Add bundle manifest file template to bundle
-            bundle: { manifest: 'bundle/manifest.bundle.cc.xml' },
+            // Bundle
+            bundle: {},
 
-            // Add a default extension manifest file to each extension
-            extensions: [{ manifest: 'bundle/manifest.extension.xml' }],
+            // Extensions
+            extensions: [],
 
             // Supported products
             products: [],
