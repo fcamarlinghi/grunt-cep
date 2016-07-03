@@ -15,12 +15,7 @@
   "bugs": {
     "url": "https://github.com/fcamarlinghi/grunt-cep/issues"
   },
-  "licenses": [
-    {
-      "type": "APACHE-2.0",
-      "url": "https://github.com/fcamarlinghi/grunt-cep/blob/master/LICENSE-APACHE-2.0"
-    }
-  ],
+  "license": "Apache-2.0",
   "main": "Gruntfile.js",
   "dependencies": {
     "lodash": "~3.9.3",
