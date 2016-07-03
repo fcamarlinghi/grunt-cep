@@ -1,4 +1,83 @@
 {
+    "CC2015.5": {
+        "photoshop": {
+            "familyname": "Photoshop",
+            "name": "Photoshop",
+            "ids": [ "PHXS", "PHSP" ],
+            "version": { "min": "17.0", "max": "17.9" },
+            "bin": { "win": "Photoshop.exe", "mac": "Adobe Photoshop CC 2015.5.app" },
+            "x64": true
+        },
+        "illustrator": {
+            "familyname": "Illustrator",
+            "name": "Illustrator",
+            "ids": [ "ILST" ],
+            "version": { "min": "20.0", "max": "20.9" },
+            "bin": { "win": "Support Files/Contents/Windows/Illustrator.exe", "mac": "Adobe Illustrator CC 2015.app" },
+            "folder": "Adobe Illustrator CC 2015.3",
+            "x64": true
+        },
+        "indesign": {
+            "familyname": "InDesign",
+            "name": "InDesign",
+            "ids": [ "IDSN" ],
+            "version": { "min": "11.0", "max": "11.9" },
+            "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign CC 2015.app" },
+            "x64": true
+        },
+        "flash": {
+            "familyname": "Flash",
+            "name": "Flash",
+            "ids": [ "FLPR" ],
+            "version": { "min": "15.0", "max": "15.9" },
+            "bin": { "win": "Flash.exe", "mac": "Adobe Flash CC 2015.app" },
+            "folder": "Adobe Flash CC 2015.2",
+            "x64": true
+        },
+        "aftereffects": {
+            "familyname": "AfterEffects",
+            "name": "After Effects",
+            "ids": [ "AEFT" ],
+            "version": { "min": "13.5", "max": "13.9" },
+            "bin": { "win": "Support Files/AfterFX.exe", "mac": "Adobe After Effects CC 2015.app" },
+            "folder": "Adobe After Effects CC 2015.3",
+            "x64": true
+        },
+        "premiere": {
+            "familyname": "Premiere",
+            "name": "Premiere Pro",
+            "ids": [ "PPRO" ],
+            "version": { "min": "10.0", "max": "10.9" },
+            "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro CC 2015.app" },
+            "folder": "Adobe Premiere Pro CC 2015.3",
+            "x64": true
+        },
+        "prelude": {
+            "familyname": "Prelude",
+            "name": "Prelude",
+            "ids": [ "PRLD" ],
+            "version": { "min": "5.0", "max": "5.9" },
+            "bin": { "win": "Prelude.exe", "mac": "Adobe Prelude CC 2015.app" },
+            "folder": "Adobe Prelude CC 2015.4",
+            "x64": false
+        },
+        "dreamweaver": {
+            "familyname": "Dreamweaver",
+            "name": "Dreamweaver",
+            "ids": [ "DRWV" ],
+            "version": { "min": "15.0", "max": "15.9" },
+            "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver CC 2015.app" },
+            "x64": false
+        },
+        "incopy": {
+            "familyname": "InCopy",
+            "name": "InCopy",
+            "ids": [ "AICY" ],
+            "version": { "min": "11.0", "max": "11.9" },
+            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy CC 2015.app" },
+            "x64": true
+        }
+    },
     "CC2015": {
         "photoshop": {
             "familyname": "Photoshop",

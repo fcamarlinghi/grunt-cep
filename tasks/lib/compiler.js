@@ -187,6 +187,7 @@ module.exports = function (grunt)
                     'CC': 'CC',
                     'CC2014': 'CC 2014',
                     'CC2015': 'CC 2015',
+                    'CC2015.5': 'CC 2015.5',
                 };
 
                 var folder_name = launch_config.host.hasOwnProperty('folder') ? launch_config.host.folder : '/Adobe ' + launch_config.host.name + ' ' + folder_family[launch_config.family];
@@ -257,82 +258,103 @@ module.exports = function (grunt)
              */
             function (callback)
             {
-                var PLISTS,
-                    options,
-                    host_family = launch_config.family;
+                var families = [launch_config.family];
 
-                if (global.IS_MAC)
+                // CC 2015.5 contains a mix of CEP 6 and CEP 7 so we need to set flags for both
+                if (launch_config.family === 'CC2015.5')
                 {
-                    PLISTS = {
-                        'CC': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.4.plist'),
-                        'CC2014': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.5.plist'),
-                        'CC2015': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.6.plist'),
-                    };
-
-                    if (!PLISTS.hasOwnProperty(host_family))
-                    {
-                        return;
-                    }
-
-                    options = {
-                        cmd: 'defaults',
-                        args: ['write', PLISTS[host_family], 'PlayerDebugMode', '1']
-                    };
-                }
-                else
-                {
-                    PLISTS = {
-                        'CC': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.4\\',
-                        'CC2014': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.5\\',
-                        'CC2015': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.6\\',
-                    };
-
-                    if (!PLISTS.hasOwnProperty(host_family))
-                    {
-                        return;
-                    }
-
-                    options = {
-                        cmd: 'reg',
-                        args: ['add', PLISTS[host_family], '/v', 'PlayerDebugMode', '/d', '1', '/f']
-                    };
+                    families.push('CC2015');
                 }
 
-                grunt.verbose.writeln((options.cmd + ' ' + options.args.join(' ')).magenta).or.write('Setting OS debug mode...');
+                grunt.verbose.or.write('Setting OS debug mode...');
 
-                var spawned = grunt.util.spawn(options, function (error, result, code)
+                async.each(families, function (family, callback)
                 {
-                    if (code !== 0)
+                    var PLIST, options;
+
+                    if (global.IS_MAC)
                     {
-                        grunt.verbose.or.ok();
+                        PLIST = {
+                            'CC': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.4.plist'),
+                            'CC2014': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.5.plist'),
+                            'CC2015': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.6.plist'),
+                            'CC2015.5': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.7.plist'),
+                        };
+
+                        if (!PLIST.hasOwnProperty(family))
+                        {
+                            callback();
+                            return;
+                        }
+
+                        options = {
+                            cmd: 'defaults',
+                            args: ['write', PLIST[family], 'PlayerDebugMode', '1']
+                        };
+                    }
+                    else
+                    {
+                        PLIST = {
+                            'CC': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.4\\',
+                            'CC2014': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.5\\',
+                            'CC2015': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.6\\',
+                            'CC2015.5': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.7\\',
+                        };
+
+                        if (!PLIST.hasOwnProperty(family))
+                        {
+                            callback();
+                            return;
+                        }
+
+                        options = {
+                            cmd: 'reg',
+                            args: ['add', PLIST[family], '/v', 'PlayerDebugMode', '/d', '1', '/f']
+                        };
+                    }
+
+                    grunt.verbose.writeln((options.cmd + ' ' + options.args.join(' ')).magenta);
+
+                    var spawned = grunt.util.spawn(options, callback);
+                    spawned.stdout.on('data', function (data) { grunt.verbose.writeln(data); });
+                    spawned.stderr.on('data', function (data) { grunt.verbose.writeln(data); });
+                },
+                function (error)
+                {
+                    if (error)
+                    {
                         grunt.fatal(error);
                     }
                     else
                     {
                         grunt.verbose.or.ok();
                     }
-
-                    // Flush preference cache to support Mac OS X 10.9 and higher
-                    if (global.IS_MAC)
-                    {
-                        var cmd = 'pkill -9 cfprefsd';
-
-                        grunt.verbose.writeln((cmd).magenta).or.write('Flushing preference cache...');
-
-                        exec(cmd, function (error, result, code)
-                        {
-                            grunt.verbose.or.ok();
-                            callback(error, result);
-                        });
-                    }
-                    else
-                    {
-                        callback(error, result);
-                    }
                 });
 
-                spawned.stdout.on('data', function (data) { grunt.verbose.writeln(data); });
-                spawned.stderr.on('data', function (data) { grunt.verbose.writeln(data); });
+                // Flush preference cache to support Mac OS X 10.9 and higher
+                if (global.IS_MAC)
+                {
+                    var cmd = 'pkill -9 cfprefsd';
+
+                    grunt.verbose.writeln((cmd).magenta).or.write('Flushing preference cache...');
+
+                    exec(cmd, function (error, result, code)
+                    {
+                        if (error)
+                        {
+                            grunt.fatal(error);
+                        }
+                        else
+                        {
+                            grunt.verbose.or.ok();
+                            callback();
+                        }
+                    });
+                }
+                else
+                {
+                    callback();
+                }
             },
 
             /**
