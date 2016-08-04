@@ -20,7 +20,8 @@
   "dependencies": {
     "lodash": "~4.13.1",
     "async": "~1.5.2",
-    "node-uuid": "~1.4.7"
+    "node-uuid": "~1.4.7",
+    "zxp-provider": "~1.1.0"
   },
   "devDependencies": {
     "grunt": "~1.0.1"

@@ -24,21 +24,12 @@ module.exports = function (grunt)
         cep = require('../lib/cep.js')(grunt);
 
     // Gets signing toolkit executable path
-    function get_zxp_path()
+    var zxp_path = (function ()
     {
-        var exec_name;
-
-        if (global.IS_WINDOWS)
-        {
-            exec_name = 'ZXPSignCmd.exe';
-        }
-        else
-        {
-            exec_name = 'ZXPSignCmd';
-        }
-
-        return path.resolve(__dirname, '../../bin/' + exec_name);
-    };
+        var exec_name = require('zxp-provider').bin;
+        exec_name = exec_name.substring(1, exec_name.length - 1); // grunt.util.spawn will complain if exec is wrapped in quotes
+        return exec_name;
+    })();
 
     /**
      * Generates a self-signed certificate.
@@ -53,7 +44,7 @@ module.exports = function (grunt)
 
         // Options
         var options = {
-            cmd: get_zxp_path(),
+            cmd: zxp_path,
             args: [
                     '-selfSignedCert',
                     'US', 'NY',
@@ -94,7 +85,7 @@ module.exports = function (grunt)
         }
 
         var spawn_options = {
-                cmd: get_zxp_path(),
+            cmd: zxp_path,
                 args: [
                     '-sign',
                     input_folder,
