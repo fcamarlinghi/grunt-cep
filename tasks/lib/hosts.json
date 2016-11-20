@@ -14,7 +14,6 @@
             "ids": [ "ILST" ],
             "version": { "min": "21.0", "max": "21.9" },
             "bin": { "win": "Support Files/Contents/Windows/Illustrator.exe", "mac": "Adobe Illustrator CC 2017.app" },
-            "folder": "Adobe Illustrator CC 2015.3",
             "x64": true
         },
         "indesign": {
@@ -31,7 +30,6 @@
             "ids": [ "FLPR" ],
             "version": { "min": "16.0", "max": "16.9" },
             "bin": { "win": "Animate.exe", "mac": "Adobe Animate CC 2017.app" },
-            "folder": "Adobe Animate CC 2017",
             "x64": true
         },
         "aftereffects": {
@@ -40,7 +38,6 @@
             "ids": [ "AEFT" ],
             "version": { "min": "14.0", "max": "14.9" },
             "bin": { "win": "Support Files/AfterFX.exe", "mac": "Adobe After Effects CC 2017.app" },
-            "folder": "Adobe After Effects CC 2017",
             "x64": true
         },
         "premiere": {
@@ -49,7 +46,6 @@
             "ids": [ "PPRO" ],
             "version": { "min": "11.0", "max": "11.9" },
             "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro CC 2017.app" },
-            "folder": "Adobe Premiere Pro CC 2017",
             "x64": true
         },
         "prelude": {
@@ -58,7 +54,6 @@
             "ids": [ "PRLD" ],
             "version": { "min": "6.0", "max": "6.9" },
             "bin": { "win": "Prelude.exe", "mac": "Adobe Prelude CC 2017.app" },
-            "folder": "Adobe Prelude CC 2017",
             "x64": false
         },
         "dreamweaver": {
