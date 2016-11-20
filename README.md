@@ -11,11 +11,21 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.4.1**:
+
+* Added support for CC2017.
+
+Thanks to *barooney* for contributing these changes.
+
+### Previous Releases
+**0.4.0**:
+
+* Added support for CC 2015.5.
+
 **0.3.5**:
 
 * Added support for extension lifecycle configuration (see `extension.lifecycle` in the configuration section below).
 
-### Previous Releases
 **0.3.4**:
 
 * Added support for ZXPSignCmd `-tsa` option (see `package.timestamp_url` in the configuration section below).
