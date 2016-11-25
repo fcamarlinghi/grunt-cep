@@ -18,10 +18,10 @@
   "license": "Apache-2.0",
   "main": "Gruntfile.js",
   "dependencies": {
-    "lodash": "~4.13.1",
-    "async": "~1.5.2",
-    "node-uuid": "~1.4.7",
-    "zxp-provider": "~1.1.0"
+    "lodash": "^4.17.2",
+    "async": "^1.5.2",
+    "uuid": "^3.0.0",
+    "zxp-provider": "^1.1.0"
   },
   "devDependencies": {
     "grunt": "~1.0.1"
