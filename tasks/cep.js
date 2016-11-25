@@ -45,7 +45,7 @@ module.exports = function (grunt)
         // SETUP
         // Make sure bundle information is correct, or fill it in
         // using data from the first extension
-        options.bundle = _.extend(
+        options.bundle = _.extendWith(
             options.bundle,
             _.pick(options.extensions[0], 'version', 'id', 'name', 'author_name'),
             function (a, b) { return typeof a !== 'string' || !a.length ? b : a; }
