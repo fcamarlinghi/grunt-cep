@@ -27,7 +27,14 @@ module.exports = function (grunt)
     var zxp_path = (function ()
     {
         var exec_name = require('zxp-provider').bin;
-        exec_name = exec_name.substring(1, exec_name.length - 1); // grunt.util.spawn will complain if exec is wrapped in quotes
+
+        if (!!process.platform.match(/^win/))
+        {
+            // grunt.util.spawn will complain on Windows if exec is wrapped in quotes
+            // Not needed on Mac since zxp-provider only wraps Windows paths in quotes
+            exec_name = exec_name.substring(1, exec_name.length - 1);
+        }
+
         return exec_name;
     })();
 
