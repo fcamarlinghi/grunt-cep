@@ -11,13 +11,19 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.4.2**:
+
+* Fixed ZXPSignCmd not working on Mac.
+* Fixed bundle information not being used to fill in manifest templates.
+* Updated dependencies to the latest available versions.
+
+### Previous Releases
 **0.4.1**:
 
 * Added support for CC2017.
 
 Thanks to *barooney* for contributing these changes.
 
-### Previous Releases
 **0.4.0**:
 
 * Added support for CC 2015.5.
