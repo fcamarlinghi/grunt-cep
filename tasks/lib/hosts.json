@@ -1,21 +1,5 @@
 {
-    "CC2018": {
-        "photoshop": {
-            "familyname": "Photoshop",
-            "name": "Photoshop",
-            "ids": [ "PHXS", "PHSP" ],
-            "version": { "min": "18.0", "max": "18.9" },
-            "bin": { "win": "Photoshop.exe", "mac": "Adobe Photoshop CC 2017.app" },
-            "x64": true
-        },
-        "illustrator": {
-            "familyname": "Illustrator",
-            "name": "Illustrator",
-            "ids": [ "ILST" ],
-            "version": { "min": "21.0", "max": "21.9" },
-            "bin": { "win": "Support Files/Contents/Windows/Illustrator.exe", "mac": "Adobe Illustrator CC 2017.app" },
-            "x64": true
-        },
+    "CC2018": {        
         "indesign": {
             "familyname": "InDesign",
             "name": "InDesign",
@@ -23,53 +7,13 @@
             "version": { "min": "13.0", "max": "13.9" },
             "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign CC 2018.app" },
             "x64": true
-        },
-        "flash": {
-            "familyname": "Animate",
-            "name": "Animate",
-            "ids": [ "FLPR" ],
-            "version": { "min": "16.0", "max": "16.9" },
-            "bin": { "win": "Animate.exe", "mac": "Adobe Animate CC 2017.app" },
-            "x64": true
-        },
-        "aftereffects": {
-            "familyname": "AfterEffects",
-            "name": "After Effects",
-            "ids": [ "AEFT" ],
-            "version": { "min": "14.0", "max": "14.9" },
-            "bin": { "win": "Support Files/AfterFX.exe", "mac": "Adobe After Effects CC 2017.app" },
-            "x64": true
-        },
-        "premiere": {
-            "familyname": "Premiere",
-            "name": "Premiere Pro",
-            "ids": [ "PPRO" ],
-            "version": { "min": "11.0", "max": "11.9" },
-            "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro CC 2017.app" },
-            "x64": true
-        },
-        "prelude": {
-            "familyname": "Prelude",
-            "name": "Prelude",
-            "ids": [ "PRLD" ],
-            "version": { "min": "6.0", "max": "6.9" },
-            "bin": { "win": "Prelude.exe", "mac": "Adobe Prelude CC 2017.app" },
-            "x64": false
-        },
-        "dreamweaver": {
-            "familyname": "Dreamweaver",
-            "name": "Dreamweaver",
-            "ids": [ "DRWV" ],
-            "version": { "min": "17.0", "max": "17.9" },
-            "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver CC 2017.app" },
-            "x64": false
-        },
-        "incopy": {
+        },      
+       "incopy": {
             "familyname": "InCopy",
             "name": "InCopy",
             "ids": [ "AICY" ],
-            "version": { "min": "12.0", "max": "12.9" },
-            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy CC 2017.app" },
+            "version": { "min": "13.0", "max": "13.9" },
+            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy CC 2018.app" },
             "x64": true
         }
     },
