@@ -189,6 +189,7 @@ module.exports = function (grunt)
                     'CC2015': 'CC 2015',
                     'CC2015.5': 'CC 2015.5',
                     'CC2017': 'CC 2017',
+                    'CC2018': 'CC 2018',
                 };
 
                 var folder_name = launch_config.host.hasOwnProperty('folder') ? launch_config.host.folder : '/Adobe ' + launch_config.host.name + ' ' + folder_family[launch_config.family];
@@ -281,6 +282,7 @@ module.exports = function (grunt)
                             'CC2015': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.6.plist'),
                             'CC2015.5': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.7.plist'),
                             'CC2017': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.7.plist'),
+                            'CC2018': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.7.plist'),
                         };
 
                         if (!PLIST.hasOwnProperty(family))
@@ -302,6 +304,7 @@ module.exports = function (grunt)
                             'CC2015': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.6\\',
                             'CC2015.5': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.7\\',
                             'CC2017': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.7\\',
+                            'CC2018': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.7\\',
                         };
 
                         if (!PLIST.hasOwnProperty(family))
