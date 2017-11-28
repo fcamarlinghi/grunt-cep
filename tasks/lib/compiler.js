@@ -282,7 +282,7 @@ module.exports = function (grunt)
                             'CC2015': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.6.plist'),
                             'CC2015.5': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.7.plist'),
                             'CC2017': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.7.plist'),
-                            'CC2018': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.7.plist'),
+                            'CC2018': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.8.plist'),
                         };
 
                         if (!PLIST.hasOwnProperty(family))
@@ -304,7 +304,7 @@ module.exports = function (grunt)
                             'CC2015': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.6\\',
                             'CC2015.5': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.7\\',
                             'CC2017': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.7\\',
-                            'CC2018': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.7\\',
+                            'CC2018': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.8\\',
                         };
 
                         if (!PLIST.hasOwnProperty(family))
