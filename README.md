@@ -11,13 +11,20 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.4.3**:
+
+* Added support for CC2018.
+* Fixed XML manifest versions to comply with XSD schema released by Adobe.
+
+Thanks to *pcdeshmukh* for contributing to this version.
+
+### Previous Releases
 **0.4.2**:
 
 * Fixed ZXPSignCmd not working on Mac.
 * Fixed bundle information not being used to fill in manifest templates.
 * Updated dependencies to the latest available versions.
 
-### Previous Releases
 **0.4.1**:
 
 * Added support for CC2017.
