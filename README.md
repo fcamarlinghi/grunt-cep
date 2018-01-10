@@ -11,6 +11,13 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.4.4**:
+
+* Fixed extension packaging for Animate CC 2017 and CC 2018.
+
+Thanks to *alebianco* for contributing this fix.
+
+### Previous Releases
 **0.4.3**:
 
 * Added support for CC2018.
@@ -18,7 +25,6 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 Thanks to *pcdeshmukh* for contributing to this version.
 
-### Previous Releases
 **0.4.2**:
 
 * Fixed ZXPSignCmd not working on Mac.
