@@ -25,7 +25,7 @@
             "x64": true
         },
         "flash": {
-            "familyname": "Animate",
+            "familyname": "Flash",
             "name": "Animate",
             "ids": [ "FLPR" ],
             "version": { "min": "18.0", "max": "18.9" },
@@ -99,7 +99,7 @@
             "x64": true
         },
         "flash": {
-            "familyname": "Animate",
+            "familyname": "Flash",
             "name": "Animate",
             "ids": [ "FLPR" ],
             "version": { "min": "16.0", "max": "16.9" },
