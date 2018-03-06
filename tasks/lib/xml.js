@@ -56,8 +56,8 @@ module.exports = function (grunt)
                 {
                     cef_params.push('<Parameter>' + cef_param + '</Parameter>')
                 });
+                extension.cef_params = cef_params.join('\n\t\t\t\t\t');
             }
-            extension.cef_params = cef_params.join('\n\t\t\t\t\t');
 
             var data = _.extend({}, { 'extension': extension, 'build': build, });
 
@@ -111,6 +111,7 @@ module.exports = function (grunt)
             });
 
         var processed = grunt.template.process(grunt.file.read(bundle.manifest), { data: data });
+
         grunt.file.write(dest, processed);
 
         grunt.verbose.or.ok();
