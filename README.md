@@ -11,13 +11,20 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.4.5**:
+
+* Fixed CEFCommandLine parameters not being applied to all builds.
+* Updated dependencies to the latest available versions.
+
+Thanks to *alebianco* for contributing these changes.
+
+### Previous Releases
 **0.4.4**:
 
 * Fixed extension packaging for Animate CC 2017 and CC 2018.
 
 Thanks to *alebianco* for contributing this fix.
 
-### Previous Releases
 **0.4.3**:
 
 * Added support for CC2018.

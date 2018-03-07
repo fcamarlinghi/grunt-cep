@@ -27,6 +27,7 @@ module.exports = function (grunt)
     var zxp_path = (function ()
     {
         var exec_name = require('zxp-provider').bin;
+        // grunt.util.spawn will complain if exec is wrapped in quotes
         exec_name = exec_name.replace(/"(.*)"/, "$1");
         return exec_name;
     })();

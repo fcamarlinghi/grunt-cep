@@ -1,7 +1,7 @@
 {
   "name": "grunt-cep",
   "description": "A Grunt plugin that helps debugging and packaging HTML5-based extensions for Adobe Creative Cloud applications.",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "homepage": "https://github.com/fcamarlinghi/grunt-cep",
   "author": {
     "name": "Francesco Camarlinghi",
