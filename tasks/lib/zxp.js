@@ -108,9 +108,9 @@ module.exports = function (grunt)
 
         var spawned = grunt.util.spawn(spawn_options, function (error, result, code)
         {
-            if (errors.length)
+            if (code !== 0)
             {
-                grunt.log.error().writeln(errors.join('\n'));
+                errors.length && grunt.log.error().writeln(errors.join('\n'));
                 grunt.fatal('Unable to create ZXP package.');
                 callback(false);
             }

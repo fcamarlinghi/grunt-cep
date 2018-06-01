@@ -21,7 +21,7 @@
     "async": "^2.6.1",
     "lodash": "^4.17.5",
     "uuid": "^3.2.1",
-    "zxp-provider": "^1.1.4"
+    "zxp-provider": "github:alebianco/zxp-provider"
   },
   "devDependencies": {
     "grunt": "^1.0.2"
