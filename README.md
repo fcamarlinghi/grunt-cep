@@ -7,10 +7,18 @@ The tool can automatically generate self-signed certificates for extension packa
 
 It is based on the `csxs` command line tool by [Creative Market](https://github.com/creativemarket/csxs).
 
-**Please note:** the plugin is currently in alpha stage and may contain bugs. Options are not freezed and may change in future versions.
+**Please note:** the plugin is currently in alpha stage and may contain bugs. Options are not frozen and may change in future versions.
 
 ## Changelog
 ### Latest Version
+**0.5.0**:
+
+* Added support for CC2019.
+* Updated dependencies to the latest versions.
+
+Thanks to *Lilipi* for contributing to this version.
+
+### Previous Releases
 **0.4.5**:
 
 * Fixed CEFCommandLine parameters not being applied to all builds.
@@ -18,7 +26,6 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 Thanks to *alebianco* for contributing these changes.
 
-### Previous Releases
 **0.4.4**:
 
 * Fixed extension packaging for Animate CC 2017 and CC 2018.
