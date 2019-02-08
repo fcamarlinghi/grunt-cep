@@ -48,6 +48,15 @@
             "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro CC 2019.app" },
             "x64": true
         },
+        "rush": {
+            "familyname": "Premiere",
+            "name": "Premiere Rush",
+            "ids": [ "RUSH" ],
+            "version": { "min": "1.0", "max": "1.9" },
+            "bin": { "win": "Adobe Premiere Rush.exe", "mac": "Adobe Premiere Rush CC.app" },
+            "folder": "Adobe Premiere Rush CC",
+            "x64": true
+        },
         "prelude": {
             "familyname": "Prelude",
             "name": "Prelude",
