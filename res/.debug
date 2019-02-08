@@ -29,6 +29,9 @@
 
       <!-- InCopy -->
       <Host Name="AICY" Port="<%= build.launch.host_port + (i * 100) + 8 %>" />
+
+      <!-- Rush -->
+      <Host Name="RUSH" Port="<%= build.launch.host_port + (i * 100) + 9 %>" />
     </HostList>
   </Extension>
   <% } %>
