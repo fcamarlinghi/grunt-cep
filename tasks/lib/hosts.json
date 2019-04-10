@@ -29,7 +29,10 @@
             "name": "Animate",
             "ids": [ "FLPR" ],
             "version": { "min": "19.0", "max": "19.9" },
-            "bin": { "win": "Animate.exe", "mac": "Adobe Animate CC 2019.app" },
+          "bin": {
+            "win": "Animate.exe",
+            "mac": "Adobe Animate 2019.app"
+          },
             "x64": true
         },
         "aftereffects": {
