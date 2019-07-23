@@ -26,9 +26,9 @@ module.exports = function (grunt)
     // Gets signing toolkit executable path
     var zxp_path = (function ()
     {
-        var exec_name = require('zxp-provider').bin;
-        // grunt.util.spawn will complain if exec is wrapped in quotes
-        exec_name = exec_name.replace(/"(.*)"/, "$1");
+        var exec_name = require('zxp-provider').env;
+        if (!exec_name) exec_name=require('zxp-provider').bin;
+
         return exec_name;
     })();
 
@@ -44,30 +44,44 @@ module.exports = function (grunt)
         }
 
         // Options
-        var options = {
-            cmd: zxp_path,
-            args: [
-                    '-selfSignedCert',
-                    'US', 'NY',
-                    options.bundle.author_name,
-                    options.bundle.author_name,
-                    options['package'].certificate.password,
-                    options['package'].certificate.file
-            ],
-        };
+        var spawn_options = [
+            '-selfSignedCert',
+            'US', 'NY',
+            options.bundle.author_name,
+            options.bundle.author_name,
+            options['package'].certificate.password,
+            options['package'].certificate.file
+        ];
+
+        var spawn_cmd = zxp_path + " " + spawn_options.join(' ');
 
         // Run ZXP sign command
-        grunt.log.writeln().writeln((options.cmd + ' ' + options.args.join(' ')).magenta);
-        var spawned = grunt.util.spawn(options, function (error, result, code)
-        {
-            if (code !== 0)
+        grunt.log.writeln().writeln((spawn_cmd).magenta);
+        var errors = [], result;
+
+        var cp = require('child_process');
+        var spawned = cp.spawn(spawn_cmd, { shell: true });
+
+		spawned.stdout.on('data', function(data) {
+            grunt.verbose.writeln(data);
+            result = data;
+		});
+
+		spawned.stderr.on('data', function(data) {
+			errors.push(data);
+		});
+
+		spawned.on('close', function(code) {
+			grunt.verbose.writeln("closed " + code);
+			if (code !== 0 )
             {
                 grunt.log.error(result);
                 grunt.fatal('An error occurred when generating the self-signed certificate.');
             }
 
-            callback(error, result);
-        });
+            callback(errors, result);
+		});
+
     };
 
     /**
@@ -75,7 +89,7 @@ module.exports = function (grunt)
      */
     var sign = function (callback, input_folder, output_file, options)
     {
-        if (!output_file)
+         if (!output_file)
         {
             grunt.fatal('Invalid output file.');
         }
@@ -85,30 +99,42 @@ module.exports = function (grunt)
             grunt.fatal('Invalid input folder.');
         }
 
-        var spawn_options = {
-            cmd: zxp_path,
-                args: [
-                    '-sign',
-                    input_folder,
-                    output_file,
-                    options['package'].certificate.file,
-                    options['package'].certificate.password,
-                ],
-            },
-            errors = [];
+        var spawn_options = [
+            '-sign',
+            input_folder,
+            output_file,
+            options['package'].certificate.file,
+            options['package'].certificate.password,
+        ];
+        var errors = [];
 
         if (options['package'].timestamp_url && options['package'].timestamp_url.length)
         {
-            spawn_options.args.push('-tsa', options['package'].timestamp_url);
+            spawn_options.push('-tsa', options['package'].timestamp_url);
         }
 
         grunt.verbose.writeln(output_file.white);
-        grunt.verbose.writeln((spawn_options.cmd + ' ' + spawn_options.args.join(' ')).magenta)
+
+        var spawn_cmd = zxp_path + " " + spawn_options.join(' ');
+
+        grunt.verbose.writeln((spawn_cmd).magenta)
         .or.write('Creating ZXP package at ' + output_file.cyan + '...');
 
-        var spawned = grunt.util.spawn(spawn_options, function (error, result, code)
-        {
-            if (errors.length)
+        var cp = require('child_process');
+
+        var spawned = cp.spawn(spawn_cmd, { shell: true });
+
+		spawned.stdout.on('data', function(data) {
+            grunt.verbose.writeln(data);
+		});
+
+		spawned.stderr.on('data', function(data) {
+            errors.push(data);
+		});
+
+		spawned.on('close', function(code) {
+			grunt.verbose.writeln("closed " + code);
+			if (errors.length)
             {
                 grunt.log.error().writeln(errors.join('\n'));
                 grunt.fatal('Unable to create ZXP package.');
@@ -118,10 +144,7 @@ module.exports = function (grunt)
             {
                 callback();
             }
-        });
-
-        spawned.stdout.on('data', function (data) { grunt.log.writeln(data); });
-        spawned.stderr.on('data', function (data) { errors.push(data); });
+		});
     };
 
     // Public interface
