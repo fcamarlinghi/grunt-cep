@@ -1,4 +1,17 @@
 {
+	"CC2020": {
+        "flash": {
+            "familyname": "Flash",
+            "name": "Animate",
+            "ids": [ "FLPR" ],
+            "version": { "min": "20.0", "max": "20.9" },
+          "bin": {
+            "win": "Animate.exe",
+            "mac": "Adobe Animate 2020.app"
+          },
+            "x64": true
+        }
+	},
 	"CC2019": {
         "photoshop": {
             "familyname": "Photoshop",
