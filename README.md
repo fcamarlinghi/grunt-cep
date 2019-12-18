@@ -11,6 +11,15 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.6.0**:
+
+* Added support for CC2020.
+* Fixed Animate CC2019 application executable.
+* Updated dependencies to latest versions.
+
+Thanks to *alebianco-doxee* and *Lilipi* for contributing to this version.
+
+### Previous Releases
 **0.5.0**:
 
 * Added support for CC2019.
@@ -18,7 +27,6 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 Thanks to *Lilipi* for contributing to this version.
 
-### Previous Releases
 **0.4.5**:
 
 * Fixed CEFCommandLine parameters not being applied to all builds.
