@@ -21,7 +21,7 @@
             "name": "InDesign",
             "ids": [ "IDSN" ],
             "version": { "min": "15.0", "max": "15.9" },
-            "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign CC 2020.app" },
+            "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign 2020.app" },
             "x64": true
         },
         "flash": {
@@ -69,7 +69,7 @@
             "name": "InCopy",
             "ids": [ "AICY" ],
             "version": { "min": "15.0", "max": "15.9" },
-            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy CC 2020.app" },
+            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy 2020.app" },
             "x64": true
         }
 	},
