@@ -1,14 +1,75 @@
 {
 	"CC2020": {
+        "photoshop": {
+            "familyname": "Photoshop",
+            "name": "Photoshop",
+            "ids": [ "PHXS", "PHSP" ],
+            "version": { "min": "21.0", "max": "21.9" },
+            "bin": { "win": "Photoshop.exe", "mac": "Adobe Photoshop 2020.app" },
+            "x64": true
+        },
+        "illustrator": {
+            "familyname": "Illustrator",
+            "name": "Illustrator",
+            "ids": [ "ILST" ],
+            "version": { "min": "24.0", "max": "24.9" },
+            "bin": { "win": "Support Files/Contents/Windows/Illustrator.exe", "mac": "Adobe Illustrator 2020.app" },
+            "x64": true
+        },
+        "indesign": {
+            "familyname": "InDesign",
+            "name": "InDesign",
+            "ids": [ "IDSN" ],
+            "version": { "min": "15.0", "max": "15.9" },
+            "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign 2020.app" },
+            "x64": true
+        },
         "flash": {
             "familyname": "Flash",
             "name": "Animate",
             "ids": [ "FLPR" ],
             "version": { "min": "20.0", "max": "20.9" },
-          "bin": {
-            "win": "Animate.exe",
-            "mac": "Adobe Animate 2020.app"
-          },
+            "bin": { "win": "Animate.exe", "mac": "Adobe Animate 2020.app" },
+            "x64": true
+        },
+        "aftereffects": {
+            "familyname": "AfterEffects",
+            "name": "After Effects",
+            "ids": [ "AEFT" ],
+            "version": { "min": "17.0", "max": "17.9" },
+            "bin": { "win": "Support Files/AfterFX.exe", "mac": "Adobe After Effects 2020.app" },
+            "x64": true
+        },
+        "premiere": {
+            "familyname": "Premiere",
+            "name": "Premiere Pro",
+            "ids": [ "PPRO" ],
+            "version": { "min": "14.0", "max": "14.9" },
+            "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro 2020.app" },
+            "x64": true
+        },
+        "prelude": {
+            "familyname": "Prelude",
+            "name": "Prelude",
+            "ids": [ "PRLD" ],
+            "version": { "min": "9.0", "max": "9.9" },
+            "bin": { "win": "Prelude.exe", "mac": "Adobe Prelude 2020.app" },
+            "x64": false
+        },
+        "dreamweaver": {
+            "familyname": "Dreamweaver",
+            "name": "Dreamweaver",
+            "ids": [ "DRWV" ],
+            "version": { "min": "20.0", "max": "20.9" },
+            "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver 2020.app" },
+            "x64": false
+        },
+        "incopy": {
+            "familyname": "InCopy",
+            "name": "InCopy",
+            "ids": [ "AICY" ],
+            "version": { "min": "15.0", "max": "15.9" },
+            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy 2020.app" },
             "x64": true
         }
 	},
@@ -42,10 +103,7 @@
             "name": "Animate",
             "ids": [ "FLPR" ],
             "version": { "min": "19.0", "max": "19.9" },
-          "bin": {
-            "win": "Animate.exe",
-            "mac": "Adobe Animate 2019.app"
-          },
+            "bin": { "win": "Animate.exe", "mac": "Adobe Animate 2019.app" },
             "x64": true
         },
         "aftereffects": {
