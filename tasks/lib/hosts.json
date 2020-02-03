@@ -13,7 +13,7 @@
             "name": "Illustrator",
             "ids": [ "ILST" ],
             "version": { "min": "24.0", "max": "24.9" },
-            "bin": { "win": "Support Files/Contents/Windows/Illustrator.exe", "mac": "Adobe Illustrator 2020.app" },
+            "bin": { "win": "Support Files/Contents/Windows/Illustrator.exe", "mac": "Adobe Illustrator.app" },
             "x64": true
         },
         "indesign": {
