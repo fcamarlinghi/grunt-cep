@@ -24,6 +24,14 @@
             "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign 2020.app" },
             "x64": true
         },
+        "flash": {
+            "familyname": "Flash",
+            "name": "Animate",
+            "ids": [ "FLPR" ],
+            "version": { "min": "21.0", "max": "21.9" },
+            "bin": { "win": "Animate.exe", "mac": "Adobe Animate 2020.app" },
+            "x64": true
+        },
         "aftereffects": {
             "familyname": "AfterEffects",
             "name": "After Effects",
