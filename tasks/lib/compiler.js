@@ -192,6 +192,7 @@ module.exports = function (grunt)
                     'CC2018': 'CC 2018',
                     'CC2019': 'CC 2019',
                     'CC2020': '2020',
+                    'CC2021': '2021',
                 };
 
                 var folder_name = launch_config.host.hasOwnProperty('folder') ? launch_config.host.folder : '/Adobe ' + launch_config.host.name + ' ' + folder_family[launch_config.family];
@@ -287,6 +288,7 @@ module.exports = function (grunt)
                             'CC2018': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.8.plist'),
                             'CC2019': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.9.plist'),
                             'CC2020': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.9.plist'),
+                            'CC2021': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.10.plist'),
                         };
 
                         if (!PLIST.hasOwnProperty(family))
@@ -311,6 +313,7 @@ module.exports = function (grunt)
                             'CC2018': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.8\\',
                             'CC2019': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.9\\',
                             'CC2020': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.9\\',
+                            'CC2021': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.10\\',
                         };
 
                         if (!PLIST.hasOwnProperty(family))

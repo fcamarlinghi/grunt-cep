@@ -11,13 +11,20 @@ It is based on the `csxs` command line tool by [Creative Market](https://github.
 
 ## Changelog
 ### Latest Version
+**0.7.0**:
+
+* Added support for CC2021.
+* Updated dependencies to latest versions.
+
+Thanks to *chadsaun* for contributing to this version.
+
+### Previous Releases
 **0.6.1**:
 
 * Fixed not being able to launch Adobe Illustrator 2020 on Mac.
 
 Thanks to *chadsaun* for contributing this fix.
 
-### Previous Releases
 **0.6.0**:
 
 * Added support for CC2020.
