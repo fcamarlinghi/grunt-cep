@@ -40,3 +40,4 @@ build
 .grunt
 
 node_modules
+/.idea
