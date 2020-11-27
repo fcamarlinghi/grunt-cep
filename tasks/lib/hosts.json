@@ -21,7 +21,7 @@
             "name": "InDesign",
             "ids": [ "IDSN" ],
             "version": { "min": "16.0", "max": "16.9" },
-            "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign 2020.app" },
+            "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign 2021.app" },
             "x64": true
         },
         "flash": {
@@ -29,7 +29,7 @@
             "name": "Animate",
             "ids": [ "FLPR" ],
             "version": { "min": "21.0", "max": "21.9" },
-            "bin": { "win": "Animate.exe", "mac": "Adobe Animate 2020.app" },
+            "bin": { "win": "Animate.exe", "mac": "Adobe Animate 2021.app" },
             "x64": true
         },
         "aftereffects": {
@@ -37,7 +37,7 @@
             "name": "After Effects",
             "ids": [ "AEFT" ],
             "version": { "min": "17.0", "max": "17.9" },
-            "bin": { "win": "Support Files/AfterFX.exe", "mac": "Adobe After Effects 2020.app" },
+            "bin": { "win": "Support Files/AfterFX.exe", "mac": "Adobe After Effects 2021.app" },
             "x64": true
         },
         "premiere": {
@@ -45,7 +45,7 @@
             "name": "Premiere Pro",
             "ids": [ "PPRO" ],
             "version": { "min": "14.0", "max": "14.9" },
-            "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro 2020.app" },
+            "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro 2021.app" },
             "x64": true
         },
         "prelude": {
@@ -53,7 +53,7 @@
             "name": "Prelude",
             "ids": [ "PRLD" ],
             "version": { "min": "9.0", "max": "9.9" },
-            "bin": { "win": "Prelude.exe", "mac": "Adobe Prelude 2020.app" },
+            "bin": { "win": "Prelude.exe", "mac": "Adobe Prelude 2021.app" },
             "x64": false
         },
         "dreamweaver": {
@@ -61,7 +61,7 @@
             "name": "Dreamweaver",
             "ids": [ "DRWV" ],
             "version": { "min": "21.0", "max": "21.9" },
-            "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver 2020.app" },
+            "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver 2021.app" },
             "x64": false
         },
         "incopy": {
@@ -69,7 +69,7 @@
             "name": "InCopy",
             "ids": [ "AICY" ],
             "version": { "min": "16.0", "max": "16.9" },
-            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy 2020.app" },
+            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy 2021.app" },
             "x64": true
         }
     },
