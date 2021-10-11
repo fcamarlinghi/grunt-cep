@@ -21,7 +21,7 @@
     "async": "^3.2.0",
     "lodash": "^4.17.20",
     "uuid": "^3.4.0",
-    "zxp-provider": "^1.2.0"
+    "zxp-provider": "^2.0.0"
   },
   "devDependencies": {
     "grunt": "^1.3.0"
