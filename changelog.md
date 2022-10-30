@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.0:
+
+* Added support for CC2023.
+* Updated dependencies to latest versions.
+
+Thanks to *chadsaun* for contributing to this version.
+
 ## 0.8.0:
 
 * Added support for CC2022.
