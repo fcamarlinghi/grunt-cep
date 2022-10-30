@@ -39,7 +39,7 @@ module.exports = function (grunt)
 
         if (!family)
         {
-            family = 'CC2022';
+            family = 'CC2023';
         }
 
         if (!HOSTS.hasOwnProperty(family))
