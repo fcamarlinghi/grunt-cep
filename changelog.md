@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0:
+
+* Added support for CC2024.
+
 ## 0.9.0:
 
 * Added support for CC2023.
