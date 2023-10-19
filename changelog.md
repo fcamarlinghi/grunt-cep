@@ -3,6 +3,9 @@
 ## 0.10.0:
 
 * Added support for CC2024.
+* Updated dependencies to latest versions.
+
+Thanks to *alebianco-doxee* for contributing to this version.
 
 ## 0.9.0:
 
