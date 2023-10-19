@@ -337,7 +337,8 @@ module.exports = function (grunt)
                  */
                 function (callback)
                 {
-                    var final_zxp = path.join(options.staging, '../', options.bundle.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + options.bundle.version + '.zxp');
+                    var environment = process.env.NODE_ENV || 'development';
+                    var final_zxp = path.join(options.staging, '../', options.bundle.name.replace(/[\s]+/g, '_').toLowerCase() + '_' + environment + '_' + options.bundle.version + '.zxp');
 
                     // It seems that the packaging utility does not overwrite files automatically
                     // So we delete the older ZXP if it exists in the folder
