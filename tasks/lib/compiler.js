@@ -196,6 +196,7 @@ module.exports = function (grunt)
                     'CC2022': '2022',
                     'CC2023': '2023',
                     'CC2024': '2024',
+                    'CC2025': '2025',
                 };
 
                 var folder_name = launch_config.host.hasOwnProperty('folder') ? launch_config.host.folder : '/Adobe ' + launch_config.host.name + ' ' + folder_family[launch_config.family];
@@ -295,6 +296,7 @@ module.exports = function (grunt)
                             'CC2022': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.11.plist'),
                             'CC2023': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.11.plist'),
                             'CC2024': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.11.plist'),
+                            'CC2025': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.11.plist'),
                         };
 
                         if (!PLIST.hasOwnProperty(family))
@@ -323,6 +325,7 @@ module.exports = function (grunt)
                             'CC2022': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11\\',
                             'CC2023': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11\\',
                             'CC2024': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11\\',
+                            'CC2025': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11\\',
                         };
 
                         if (!PLIST.hasOwnProperty(family))

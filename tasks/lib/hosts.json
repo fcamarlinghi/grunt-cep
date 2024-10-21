@@ -1,4 +1,78 @@
 {
+    "CC2025": {
+        "photoshop": {
+            "familyname": "Photoshop",
+            "name": "Photoshop",
+            "ids": ["PHXS", "PHSP"],
+            "version": { "min": "26.0", "max": "26.9" },
+            "bin": { "win": "Photoshop.exe", "mac": "Adobe Photoshop 2025.app" },
+            "x64": true
+        },
+        "illustrator": {
+            "familyname": "Illustrator",
+            "name": "Illustrator",
+            "ids": ["ILST"],
+            "version": { "min": "29.0", "max": "29.9" },
+            "bin": { "win": "Support Files/Contents/Windows/Illustrator.exe", "mac": "Adobe Illustrator.app" },
+            "x64": true
+        },
+        "indesign": {
+            "familyname": "InDesign",
+            "name": "InDesign",
+            "ids": ["IDSN"],
+            "version": { "min": "20.0", "max": "20.9" },
+            "bin": { "win": "InDesign.exe", "mac": "Adobe InDesign 2025.app" },
+            "x64": true
+        },
+        "flash": {
+            "familyname": "Flash",
+            "name": "Animate",
+            "ids": ["FLPR"],
+            "version": { "min": "25.0", "max": "25.9" },
+            "bin": { "win": "Animate.exe", "mac": "Adobe Animate 2025.app" },
+            "x64": true
+        },
+        "aftereffects": {
+            "familyname": "AfterEffects",
+            "name": "After Effects",
+            "ids": ["AEFT"],
+            "version": { "min": "21.0", "max": "21.9" },
+            "bin": { "win": "Support Files/AfterFX.exe", "mac": "Adobe After Effects 2025.app" },
+            "x64": true
+        },
+        "premiere": {
+            "familyname": "Premiere",
+            "name": "Premiere Pro",
+            "ids": ["PPRO"],
+            "version": { "min": "18.0", "max": "18.9" },
+            "bin": { "win": "Adobe Premiere Pro.exe", "mac": "Adobe Premiere Pro 2025.app" },
+            "x64": true
+        },
+        "prelude": {
+            "familyname": "Prelude",
+            "name": "Prelude",
+            "ids": ["PRLD"],
+            "version": { "min": "13.0", "max": "13.9" },
+            "bin": { "win": "Prelude.exe", "mac": "Adobe Prelude 2025.app" },
+            "x64": false
+        },
+        "dreamweaver": {
+            "familyname": "Dreamweaver",
+            "name": "Dreamweaver",
+            "ids": ["DRWV"],
+            "version": { "min": "25.0", "max": "25.9" },
+            "bin": { "win": "Dreamweaver.exe", "mac": "Adobe Dreamweaver 2025.app" },
+            "x64": false
+        },
+        "incopy": {
+            "familyname": "InCopy",
+            "name": "InCopy",
+            "ids": ["AICY"],
+            "version": { "min": "20.0", "max": "20.9" },
+            "bin": { "win": "InCopy.exe", "mac": "Adobe InCopy 2025.app" },
+            "x64": true
+        }
+    },
     "CC2024": {
         "photoshop": {
             "familyname": "Photoshop",
