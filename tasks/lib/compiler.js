@@ -275,6 +275,12 @@ module.exports = function (grunt)
                     families.push('CC2015');
                 }
 
+                // CC 2025 contains a mix of CEP 11 and CEP 12 so we need to set flags for both
+                if (launch_config.family === 'CC2025')
+                {
+                    families.push('CC2024');
+                }
+
                 grunt.verbose.or.write('Setting OS debug mode...');
 
                 async.each(families, function (family, callback)
@@ -296,7 +302,7 @@ module.exports = function (grunt)
                             'CC2022': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.11.plist'),
                             'CC2023': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.11.plist'),
                             'CC2024': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.11.plist'),
-                            'CC2025': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.11.plist'),
+                            'CC2025': path.join(process.env['HOME'], '/Library/Preferences/com.adobe.CSXS.12.plist'),
                         };
 
                         if (!PLIST.hasOwnProperty(family))
@@ -325,7 +331,7 @@ module.exports = function (grunt)
                             'CC2022': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11\\',
                             'CC2023': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11\\',
                             'CC2024': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11\\',
-                            'CC2025': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.11\\',
+                            'CC2025': 'HKEY_CURRENT_USER\\Software\\Adobe\\CSXS.12\\',
                         };
 
                         if (!PLIST.hasOwnProperty(family))

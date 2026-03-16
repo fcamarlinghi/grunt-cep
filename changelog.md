@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.11.0:
+
+* Added support for CC2025.
+* Updated dependencies to latest versions.
+
+Thanks to *chadsaun* for contributing to this version.
+
 ## 0.10.0:
 
 * Added support for CC2024.
